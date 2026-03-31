@@ -1176,6 +1176,11 @@ var jdd = {
     /** Index in localCaseHandles for the active tab */
     activeLocalIndex: null,
 
+    /** After a rename gesture (2nd mousedown / context menu), ignore tab clicks briefly (Chrome click/dblclick quirks). */
+    ignoreTabClicksUntil: 0,
+
+    caseTabRenameTooltip: 'Right-click or double-click to rename',
+
     /** Debounce handle for notes (cleared on tab switch) */
     notesSaveTimer: null,
 
@@ -1241,7 +1246,7 @@ var jdd = {
                 b.setAttribute('data-case-id', toId);
                 var parts = toId.split('/');
                 b.textContent = parts[parts.length - 1];
-                b.title = toId + ' — double-click to rename';
+                b.title = toId + ' — ' + jdd.caseTabRenameTooltip;
                 break;
             }
         }
@@ -1259,11 +1264,119 @@ var jdd = {
             var b = buttons[i];
             if (b.getAttribute('data-local-index') === String(localIndex)) {
                 b.textContent = newName;
-                b.title = newName + ' — double-click to rename';
+                b.title = newName + ' — ' + jdd.caseTabRenameTooltip;
                 break;
             }
         }
         jdd.updateLocalTabActive(jdd.activeLocalIndex);
+    },
+
+    /**
+     * Rename folder for a tab (local: File System Access move; server: rename-case.php).
+     * Prefer second-click mousedown or context menu in Chrome; dblclick on buttons is unreliable.
+     */
+    renameCaseTabFromButton: function (btn) {
+        if (!btn) {
+            return;
+        }
+        var localIdxStr = btn.getAttribute('data-local-index');
+        if (localIdxStr !== null && localIdxStr !== '') {
+            var idx = parseInt(localIdxStr, 10);
+            if (!jdd.localCaseHandles || !jdd.localCaseHandles[idx]) {
+                return;
+            }
+            var dirHandle = jdd.localCaseHandles[idx].dirHandle;
+            var leaf = dirHandle.name || '';
+            jdd.ignoreTabClicksUntil = Date.now() + 900;
+            var name = window.prompt('Rename folder on disk:', leaf);
+            if (name === null) {
+                jdd.ignoreTabClicksUntil = 0;
+                return;
+            }
+            name = name.trim();
+            if (!name || name === leaf) {
+                jdd.ignoreTabClicksUntil = 0;
+                return;
+            }
+            if (!jdd.isValidCaseSegment(name)) {
+                window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
+                jdd.ignoreTabClicksUntil = 0;
+                return;
+            }
+            jdd.flushNotesIfPending().then(function () {
+                var entry = jdd.localCaseHandles[idx];
+                var moveFn = typeof dirHandle.move === 'function' ? dirHandle.move.bind(dirHandle) : null;
+                if (!moveFn && typeof FileSystemHandle !== 'undefined' && typeof FileSystemHandle.prototype.move === 'function') {
+                    moveFn = FileSystemHandle.prototype.move.bind(dirHandle);
+                }
+                if (moveFn) {
+                    return moveFn(name).then(function () {
+                        if (entry) {
+                            entry.name = name;
+                        }
+                        if (jdd.activeLocalIndex === idx) {
+                            jdd.localActiveDirHandle = dirHandle;
+                        }
+                        jdd.applyLocalCaseRename(idx, name);
+                    });
+                }
+                return jdd.resolveLocalCaseParentForRename(entry).then(function (parentHandle) {
+                    if (!parentHandle) {
+                        window.alert('Cannot rename this folder from the browser: pick a parent folder that contains your case folders as subfolders (not only the case folder itself), or rename in Finder/Explorer. Chrome usually does not expose directory rename on the folder you select.');
+                        return;
+                    }
+                    var oldName = dirHandle.name || leaf;
+                    return jdd.localRenameDirCopyThenRemove(parentHandle, oldName, name, idx);
+                });
+            }).catch(function (err) {
+                console.error(err);
+                window.alert(err.message || 'Could not rename folder.');
+            });
+            return;
+        }
+        var fromCaseId = btn.getAttribute('data-case-id');
+        if (!fromCaseId) {
+            return;
+        }
+        var parts = fromCaseId.split('/');
+        var leafSeg = parts[parts.length - 1];
+        jdd.ignoreTabClicksUntil = Date.now() + 900;
+        var newName = window.prompt('Rename folder on disk:', leafSeg);
+        if (newName === null) {
+            jdd.ignoreTabClicksUntil = 0;
+            return;
+        }
+        newName = newName.trim();
+        if (!newName || newName === leafSeg) {
+            jdd.ignoreTabClicksUntil = 0;
+            return;
+        }
+        if (!jdd.isValidCaseSegment(newName)) {
+            window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
+            jdd.ignoreTabClicksUntil = 0;
+            return;
+        }
+        jdd.flushNotesIfPending().then(function () {
+            return fetch('rename-case.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fromCaseId: fromCaseId, newLeafName: newName })
+            }).then(function (r) {
+                return r.json().then(function (body) {
+                    if (!r.ok) {
+                        throw new Error(body.error || 'Rename failed');
+                    }
+                    return body;
+                });
+            });
+        }).then(function (body) {
+            if (body && body.toCaseId) {
+                jdd.applyCaseRename(fromCaseId, body.toCaseId);
+            }
+        }).catch(function (err) {
+            console.error(err);
+            window.alert(err.message || 'Could not rename folder (needs PHP and write access).');
+        });
     },
 
     encodeCasePath: function (caseId) {
@@ -1358,7 +1471,7 @@ var jdd = {
             btn.setAttribute('role', 'tab');
             btn.setAttribute('aria-selected', 'false');
             btn.textContent = label;
-            btn.title = cid + ' — double-click to rename';
+            btn.title = cid + ' — ' + jdd.caseTabRenameTooltip;
             bar.appendChild(btn);
         }
     },
@@ -1385,7 +1498,7 @@ var jdd = {
             btn.setAttribute('role', 'tab');
             btn.setAttribute('aria-selected', 'false');
             btn.textContent = label;
-            btn.title = label + ' — double-click to rename';
+            btn.title = label + ' — ' + jdd.caseTabRenameTooltip;
             bar.appendChild(btn);
         }
     },
@@ -1438,6 +1551,85 @@ var jdd = {
         });
     },
 
+    /** Copy all files and subfolders from src into dest (both directory handles). */
+    copyLocalDirInto: function (src, dest) {
+        var iter = src.entries();
+        function next() {
+            return iter.next().then(function (step) {
+                if (step.done) {
+                    return;
+                }
+                var nm = step.value[0];
+                var h = step.value[1];
+                if (h.kind === 'file') {
+                    return h.getFile().then(function (file) {
+                        return file.arrayBuffer();
+                    }).then(function (buf) {
+                        return dest.getFileHandle(nm, { create: true }).then(function (fh) {
+                            return fh.createWritable();
+                        }).then(function (writable) {
+                            return writable.write(buf).then(function () {
+                                return writable.close();
+                            });
+                        });
+                    }).then(next);
+                }
+                return dest.getDirectoryHandle(nm, { create: true }).then(function (subDest) {
+                    return jdd.copyLocalDirInto(h, subDest);
+                }).then(next);
+            });
+        }
+        return next();
+    },
+
+    resolveLocalCaseParentForRename: function (entry) {
+        if (entry.parentHandle) {
+            return Promise.resolve(entry.parentHandle);
+        }
+        var dh = entry.dirHandle;
+        if (dh && typeof dh.getParent === 'function') {
+            return dh.getParent().catch(function () {
+                return null;
+            });
+        }
+        return Promise.resolve(null);
+    },
+
+    /**
+     * Rename a case folder when FileSystemHandle.move is missing (typical for directories in Chrome).
+     * Copies contents into sibling newName, then removes oldName under parentHandle.
+     */
+    localRenameDirCopyThenRemove: function (parentHandle, oldName, newName, idx) {
+        return parentHandle.getDirectoryHandle(newName).then(function () {
+            throw new Error('A folder with that name already exists.');
+        }).catch(function (err) {
+            if (err && err.message === 'A folder with that name already exists.') {
+                throw err;
+            }
+            if (err && err.name !== 'NotFoundError') {
+                throw err;
+            }
+            return parentHandle.getDirectoryHandle(oldName);
+        }).then(function (srcDir) {
+            return parentHandle.getDirectoryHandle(newName, { create: true }).then(function (destDir) {
+                return jdd.copyLocalDirInto(srcDir, destDir);
+            }).then(function () {
+                return parentHandle.removeEntry(oldName, { recursive: true });
+            }).then(function () {
+                return parentHandle.getDirectoryHandle(newName);
+            });
+        }).then(function (newDirHandle) {
+            if (jdd.localCaseHandles && jdd.localCaseHandles[idx]) {
+                jdd.localCaseHandles[idx].dirHandle = newDirHandle;
+                jdd.localCaseHandles[idx].name = newName;
+            }
+            if (jdd.activeLocalIndex === idx) {
+                jdd.localActiveDirHandle = newDirHandle;
+            }
+            jdd.applyLocalCaseRename(idx, newName);
+        });
+    },
+
     scanLocalCases: function (parentHandle) {
         var subdirs = [];
         var iter = parentHandle.entries();
@@ -1455,7 +1647,7 @@ var jdd = {
                         jdd.localHasFile(parentHandle, 'right.json')
                     ]).then(function (has) {
                         if (has[0] && has[1]) {
-                            return [{ dirHandle: parentHandle, name: parentHandle.name || '…' }];
+                            return [{ dirHandle: parentHandle, name: parentHandle.name || '…', parentHandle: null }];
                         }
                         return [];
                     });
@@ -1470,7 +1662,7 @@ var jdd = {
                     jdd.localHasFile(handle, 'right.json')
                 ]).then(function (has) {
                     if (has[0] && has[1]) {
-                        subdirs.push({ dirHandle: handle, name: name });
+                        subdirs.push({ dirHandle: handle, name: name, parentHandle: parentHandle });
                     }
                     return nextEntry();
                 });
@@ -1688,7 +1880,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var caseTabsBar = document.getElementById('caseTabsBar');
     if (caseTabsBar) {
+        caseTabsBar.addEventListener('mousedown', function (event) {
+            if (event.button !== 0 || event.detail !== 2) {
+                return;
+            }
+            var btn = event.target.closest('button.caseTab');
+            if (!btn) {
+                return;
+            }
+            event.preventDefault();
+            jdd.renameCaseTabFromButton(btn);
+        }, true);
+        caseTabsBar.addEventListener('contextmenu', function (event) {
+            var btn = event.target.closest('button.caseTab');
+            if (!btn) {
+                return;
+            }
+            event.preventDefault();
+            jdd.renameCaseTabFromButton(btn);
+        });
         caseTabsBar.addEventListener('click', function (event) {
+            if (Date.now() < jdd.ignoreTabClicksUntil) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                return;
+            }
             var btn = event.target.closest('button.caseTab');
             if (!btn) {
                 return;
@@ -1710,86 +1926,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             jdd.flushNotesIfPending().then(function () {
                 jdd.loadComparisonCase(caseId);
-            });
-        });
-        caseTabsBar.addEventListener('dblclick', function (event) {
-            var btn = event.target.closest('button.caseTab');
-            if (!btn) {
-                return;
-            }
-            event.preventDefault();
-            var localIdxStr = btn.getAttribute('data-local-index');
-            if (localIdxStr !== null && localIdxStr !== '') {
-                var idx = parseInt(localIdxStr, 10);
-                if (!jdd.localCaseHandles || !jdd.localCaseHandles[idx]) {
-                    return;
-                }
-                var dirHandle = jdd.localCaseHandles[idx].dirHandle;
-                var leaf = dirHandle.name || '';
-                var name = window.prompt('Rename folder on disk:', leaf);
-                if (name === null) {
-                    return;
-                }
-                name = name.trim();
-                if (!name || name === leaf) {
-                    return;
-                }
-                if (!jdd.isValidCaseSegment(name)) {
-                    window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
-                    return;
-                }
-                jdd.flushNotesIfPending().then(function () {
-                    if (typeof dirHandle.move !== 'function') {
-                        window.alert('Renaming local folders is not supported in this browser.');
-                        return;
-                    }
-                    return dirHandle.move(name).then(function () {
-                        jdd.applyLocalCaseRename(idx, name);
-                    });
-                }).catch(function (err) {
-                    console.error(err);
-                    window.alert(err.message || 'Could not rename folder.');
-                });
-                return;
-            }
-            var fromCaseId = btn.getAttribute('data-case-id');
-            if (!fromCaseId) {
-                return;
-            }
-            var parts = fromCaseId.split('/');
-            var leafSeg = parts[parts.length - 1];
-            var newName = window.prompt('Rename folder on disk:', leafSeg);
-            if (newName === null) {
-                return;
-            }
-            newName = newName.trim();
-            if (!newName || newName === leafSeg) {
-                return;
-            }
-            if (!jdd.isValidCaseSegment(newName)) {
-                window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
-                return;
-            }
-            jdd.flushNotesIfPending().then(function () {
-                return fetch('rename-case.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ fromCaseId: fromCaseId, newLeafName: newName })
-                }).then(function (r) {
-                    return r.json().then(function (body) {
-                        if (!r.ok) {
-                            throw new Error(body.error || 'Rename failed');
-                        }
-                        return body;
-                    });
-                });
-            }).then(function (body) {
-                if (body && body.toCaseId) {
-                    jdd.applyCaseRename(fromCaseId, body.toCaseId);
-                }
-            }).catch(function (err) {
-                console.error(err);
-                window.alert(err.message || 'Could not rename folder (needs PHP and write access).');
             });
         });
     }
