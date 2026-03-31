@@ -271,6 +271,31 @@ textarea.notesField {
     max-width: 40rem;
 }
 
+.inputJsonSection {
+    margin: 0 0 1.25em 0;
+}
+
+.inputJsonSection label {
+    display: block;
+    margin-bottom: 0.35em;
+    font-weight: 600;
+    color: #333;
+}
+
+textarea.inputJsonField {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 5rem;
+    max-height: 18rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: Monaco, monospace;
+    font-size: 0.85rem;
+    background: #fafafa;
+    color: #222;
+    cursor: default;
+}
+
 .folderBrowserSection {
     margin: 0 0 1.25em 0;
 }

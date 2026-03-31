@@ -1157,6 +1157,7 @@ var jdd = {
      * Load in the sample data
      */
     loadSampleData: function () {
+        jdd.setInputJsonDisplay('');
         document.getElementById('textarealeft').value='{"Aidan Gillen": {"array": ["Game of Thron\\"es","The Wire"],"string": "some string","int": 2,"aboolean": true, "boolean": true,"object": {"foo": "bar","object1": {"new prop1": "new prop value"},"object2": {"new prop1": "new prop value"},"object3": {"new prop1": "new prop value"},"object4": {"new prop1": "new prop value"}}},"Amy Ryan": {"one": "In Treatment","two": "The Wire"},"Annie Fitzgerald": ["Big Love","True Blood"],"Anwan Glover": ["Treme","The Wire"],"Alexander Skarsgard": ["Generation Kill","True Blood"], "Clarke Peters": null}';
         /*$('#textarealeft').val('[{  "OBJ_ID": "CN=Kate Smith,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com",  "userAccountControl": "512",  "objectGUID": "b3067a77-875b-4208-9ee3-39128adeb654",  "lastLogon": "0",  "sAMAccountName": "ksmith",  "userPrincipalName": "ksmith@cloudaddc.qalab.cam.novell.com",  "distinguishedName": "CN=Kate Smith,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com"},{  "OBJ_ID": "CN=Timothy Swan,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com",  "userAccountControl": "512",  "objectGUID": "c3f7dae9-9b4f-4d55-a1ec-bf9ef45061c3",  "lastLogon": "130766915788304915",  "sAMAccountName": "tswan",  "userPrincipalName": "tswan@cloudaddc.qalab.cam.novell.com",  "distinguishedName": "CN=Timothy Swan,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com"}]');
         $('#textarearight').val('{"foo":[{  "OBJ_ID": "CN=Timothy Swan,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com",  "userAccountControl": "512",  "objectGUID": "c3f7dae9-9b4f-4d55-a1ec-bf9ef45061c3",  "lastLogon": "130766915788304915",  "sAMAccountName": "tswan",  "userPrincipalName": "tswan@cloudaddc.qalab.cam.novell.com",  "distinguishedName": "CN=Timothy Swan,OU=Users,OU=Willow,DC=cloudaddc,DC=qalab,DC=cam,DC=novell,DC=com"}]}');*/
@@ -1166,8 +1167,27 @@ var jdd = {
     /** When set, notes auto-save to comparisons/<id>/notes.txt via save-notes.php */
     comparisonCaseId: null,
 
+    /** File System Access API: subfolder handles with left.json+right.json, or null */
+    localCaseHandles: null,
+
+    /** Active case directory when using local folders (notes.txt written here) */
+    localActiveDirHandle: null,
+
+    /** Index in localCaseHandles for the active tab */
+    activeLocalIndex: null,
+
     /** Debounce handle for notes (cleared on tab switch) */
     notesSaveTimer: null,
+
+    exitLocalMode: function () {
+        jdd.localCaseHandles = null;
+        jdd.localActiveDirHandle = null;
+        jdd.activeLocalIndex = null;
+    },
+
+    supportsLocalFolderPicker: function () {
+        return typeof window.showDirectoryPicker === 'function';
+    },
 
     /** One path segment: no / or \\, not . or .., no ASCII control chars; spaces and Unicode OK (matches PHP). */
     isValidCaseSegment: function (s) {
@@ -1228,6 +1248,24 @@ var jdd = {
         jdd.updateCaseTabActive(jdd.comparisonCaseId);
     },
 
+    applyLocalCaseRename: function (localIndex, newName) {
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar || !jdd.localCaseHandles || !jdd.localCaseHandles[localIndex]) {
+            return;
+        }
+        var buttons = bar.querySelectorAll('button[data-local-index]');
+        var i;
+        for (i = 0; i < buttons.length; i++) {
+            var b = buttons[i];
+            if (b.getAttribute('data-local-index') === String(localIndex)) {
+                b.textContent = newName;
+                b.title = newName + ' — double-click to rename';
+                break;
+            }
+        }
+        jdd.updateLocalTabActive(jdd.activeLocalIndex);
+    },
+
     encodeCasePath: function (caseId) {
         return caseId.split('/').map(function (seg) {
             return encodeURIComponent(seg);
@@ -1240,12 +1278,20 @@ var jdd = {
             jdd.notesSaveTimer = null;
         }
         var notesEl = document.getElementById('notesField');
-        if (!notesEl || !jdd.comparisonCaseId) {
+        if (!notesEl) {
             return Promise.resolve();
         }
-        return jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
-            console.warn('Could not save notes before switching.');
-        });
+        if (jdd.comparisonCaseId) {
+            return jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
+                console.warn('Could not save notes before switching.');
+            });
+        }
+        if (jdd.localActiveDirHandle) {
+            return jdd.saveNotesToLocalDir(jdd.localActiveDirHandle, notesEl.value).catch(function () {
+                console.warn('Could not save notes before switching.');
+            });
+        }
+        return Promise.resolve();
     },
 
     /** When using folder mode, list of case ids shown as tabs (or null) */
@@ -1261,6 +1307,26 @@ var jdd = {
             var b = buttons[i];
             var id = b.getAttribute('data-case-id');
             if (id === caseId) {
+                b.classList.add('caseTabActive');
+                b.setAttribute('aria-selected', 'true');
+            } else {
+                b.classList.remove('caseTabActive');
+                b.setAttribute('aria-selected', 'false');
+            }
+        }
+    },
+
+    updateLocalTabActive: function (index) {
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar) {
+            return;
+        }
+        var buttons = bar.querySelectorAll('button[data-local-index]');
+        var i;
+        for (i = 0; i < buttons.length; i++) {
+            var b = buttons[i];
+            var idx = b.getAttribute('data-local-index');
+            if (idx === String(index)) {
                 b.classList.add('caseTabActive');
                 b.setAttribute('aria-selected', 'true');
             } else {
@@ -1297,7 +1363,186 @@ var jdd = {
         }
     },
 
+    renderLocalCaseTabs: function (handles) {
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar) {
+            return;
+        }
+        bar.innerHTML = '';
+        if (!handles || handles.length === 0) {
+            bar.style.display = 'none';
+            return;
+        }
+        bar.style.display = 'flex';
+        var i;
+        for (i = 0; i < handles.length; i++) {
+            var h = handles[i].dirHandle;
+            var label = h.name || String(i);
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'caseTab';
+            btn.setAttribute('data-local-index', String(i));
+            btn.setAttribute('role', 'tab');
+            btn.setAttribute('aria-selected', 'false');
+            btn.textContent = label;
+            btn.title = label + ' — double-click to rename';
+            bar.appendChild(btn);
+        }
+    },
+
+    localHasFile: function (dirHandle, name) {
+        return dirHandle.getFileHandle(name).then(function () {
+            return true;
+        }).catch(function () {
+            return false;
+        });
+    },
+
+    readLocalFileText: function (dirHandle, name) {
+        return dirHandle.getFileHandle(name).then(function (fh) {
+            return fh.getFile();
+        }).then(function (file) {
+            return file.text();
+        });
+    },
+
+    readLocalFileTextOptional: function (dirHandle, name) {
+        return jdd.readLocalFileText(dirHandle, name).catch(function () {
+            return '';
+        });
+    },
+
+    setInputJsonDisplay: function (text) {
+        var sec = document.getElementById('inputJsonSection');
+        var el = document.getElementById('inputJsonField');
+        if (!sec || !el) {
+            return;
+        }
+        var s = typeof text === 'string' ? text : '';
+        if (s.length === 0) {
+            el.value = '';
+            sec.style.display = 'none';
+        } else {
+            el.value = s;
+            sec.style.display = 'block';
+        }
+    },
+
+    saveNotesToLocalDir: function (dirHandle, content) {
+        return dirHandle.getFileHandle('notes.txt', { create: true }).then(function (fh) {
+            return fh.createWritable();
+        }).then(function (writable) {
+            return writable.write(content).then(function () {
+                return writable.close();
+            });
+        });
+    },
+
+    scanLocalCases: function (parentHandle) {
+        var subdirs = [];
+        var iter = parentHandle.entries();
+        function nextEntry() {
+            return iter.next().then(function (step) {
+                if (step.done) {
+                    subdirs.sort(function (a, b) {
+                        return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+                    });
+                    if (subdirs.length > 0) {
+                        return subdirs;
+                    }
+                    return Promise.all([
+                        jdd.localHasFile(parentHandle, 'left.json'),
+                        jdd.localHasFile(parentHandle, 'right.json')
+                    ]).then(function (has) {
+                        if (has[0] && has[1]) {
+                            return [{ dirHandle: parentHandle, name: parentHandle.name || '…' }];
+                        }
+                        return [];
+                    });
+                }
+                var name = step.value[0];
+                var handle = step.value[1];
+                if (handle.kind !== 'directory') {
+                    return nextEntry();
+                }
+                return Promise.all([
+                    jdd.localHasFile(handle, 'left.json'),
+                    jdd.localHasFile(handle, 'right.json')
+                ]).then(function (has) {
+                    if (has[0] && has[1]) {
+                        subdirs.push({ dirHandle: handle, name: name });
+                    }
+                    return nextEntry();
+                });
+            });
+        }
+        return nextEntry();
+    },
+
+    loadLocalCaseByIndex: function (index) {
+        if (!jdd.localCaseHandles || !jdd.localCaseHandles[index]) {
+            return;
+        }
+        jdd.activeLocalIndex = index;
+        return jdd.loadLocalCase(jdd.localCaseHandles[index].dirHandle).then(function () {
+            jdd.updateLocalTabActive(index);
+        });
+    },
+
+    loadLocalCase: function (dirHandle) {
+        return Promise.all([
+            jdd.readLocalFileText(dirHandle, 'left.json'),
+            jdd.readLocalFileText(dirHandle, 'right.json'),
+            jdd.readLocalFileTextOptional(dirHandle, 'notes.txt'),
+            jdd.readLocalFileTextOptional(dirHandle, 'input.json')
+        ]).then(function (parts) {
+            jdd.comparisonCaseId = null;
+            jdd.localActiveDirHandle = dirHandle;
+            document.getElementById('textarealeft').value = parts[0];
+            document.getElementById('textarearight').value = parts[1];
+            var notesEl = document.getElementById('notesField');
+            if (notesEl) {
+                notesEl.value = parts[2];
+            }
+            jdd.setInputJsonDisplay(parts[3]);
+            jdd.compare();
+        }).catch(function (err) {
+            console.error(err);
+            window.alert('Could not read left.json or right.json from this folder.');
+        });
+    },
+
+    loadLocalFolderFromPicker: function () {
+        if (!jdd.supportsLocalFolderPicker()) {
+            window.alert('This browser does not support opening folders. Try Chrome or Edge over HTTPS or localhost.');
+            return;
+        }
+        window.showDirectoryPicker({ mode: 'readwrite' }).then(function (parentHandle) {
+            jdd.exitLocalMode();
+            jdd.caseTabIds = null;
+            jdd.comparisonCaseId = null;
+            return jdd.scanLocalCases(parentHandle).then(function (cases) {
+                if (cases.length === 0) {
+                    jdd.exitLocalMode();
+                    jdd.renderLocalCaseTabs([]);
+                    window.alert('No comparison folders found. Add subfolders (or use this folder) each with left.json and right.json.');
+                    return;
+                }
+                jdd.localCaseHandles = cases;
+                jdd.renderLocalCaseTabs(cases);
+                return jdd.loadLocalCaseByIndex(0);
+            });
+        }).catch(function (err) {
+            if (err && err.name === 'AbortError') {
+                return;
+            }
+            console.error(err);
+            window.alert('Could not open folder: ' + (err && err.message ? err.message : String(err)));
+        });
+    },
+
     loadFolderCases: function (parentFolder) {
+        jdd.exitLocalMode();
         if (!jdd.isValidCaseId(parentFolder)) {
             window.alert('Invalid folder path. Segments cannot contain slashes in the name; use / only between folders. Avoid . and .. as names.');
             return;
@@ -1325,6 +1570,7 @@ var jdd = {
     },
 
     loadComparisonCase: function (caseId) {
+        jdd.exitLocalMode();
         if (!jdd.isValidCaseId(caseId)) {
             return;
         }
@@ -1344,6 +1590,9 @@ var jdd = {
             }),
             fetch(base + 'notes.txt').then(function (r) {
                 return r.ok ? r.text() : '';
+            }),
+            fetch(base + 'input.json').then(function (r) {
+                return r.ok ? r.text() : '';
             })
         ]).then(function (parts) {
             jdd.comparisonCaseId = caseId;
@@ -1353,6 +1602,7 @@ var jdd = {
             if (notesEl) {
                 notesEl.value = parts[2];
             }
+            jdd.setInputJsonDisplay(parts[3]);
             if (jdd.caseTabIds) {
                 jdd.updateCaseTabActive(caseId);
             }
@@ -1392,12 +1642,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var caseParam = jdd.getParameterByName('case');
     var folderParam = jdd.getParameterByName('folder');
     if (caseParam) {
+        jdd.exitLocalMode();
         jdd.caseTabIds = null;
         jdd.renderCaseTabs([]);
         jdd.loadComparisonCase(caseParam);
     } else if (folderParam) {
         jdd.loadFolderCases(folderParam);
     } else {
+        jdd.setInputJsonDisplay('');
         if (jdd.getParameterByName('left')) {
             document.getElementById('textarealeft').value=jdd.getParameterByName('left');
         }
@@ -1414,24 +1666,42 @@ document.addEventListener('DOMContentLoaded', function() {
     var notesEl = document.getElementById('notesField');
     if (notesEl) {
         notesEl.addEventListener('input', function () {
-            if (!jdd.comparisonCaseId) {
-                return;
-            }
             clearTimeout(jdd.notesSaveTimer);
-            jdd.notesSaveTimer = setTimeout(function () {
-                jdd.notesSaveTimer = null;
-                jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
-                    console.warn('Could not save notes (needs PHP: Docker image or php -S).');
-                });
-            }, 450);
+            if (jdd.comparisonCaseId) {
+                jdd.notesSaveTimer = setTimeout(function () {
+                    jdd.notesSaveTimer = null;
+                    jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
+                        console.warn('Could not save notes (needs PHP: Docker image or php -S).');
+                    });
+                }, 450);
+            } else if (jdd.localActiveDirHandle) {
+                var dirHandle = jdd.localActiveDirHandle;
+                jdd.notesSaveTimer = setTimeout(function () {
+                    jdd.notesSaveTimer = null;
+                    jdd.saveNotesToLocalDir(dirHandle, notesEl.value).catch(function () {
+                        console.warn('Could not save notes to local folder.');
+                    });
+                }, 450);
+            }
         });
     }
 
     var caseTabsBar = document.getElementById('caseTabsBar');
     if (caseTabsBar) {
         caseTabsBar.addEventListener('click', function (event) {
-            var btn = event.target.closest('button[data-case-id]');
+            var btn = event.target.closest('button.caseTab');
             if (!btn) {
+                return;
+            }
+            var localIdxStr = btn.getAttribute('data-local-index');
+            if (localIdxStr !== null && localIdxStr !== '') {
+                var lidx = parseInt(localIdxStr, 10);
+                if (lidx === jdd.activeLocalIndex) {
+                    return;
+                }
+                jdd.flushNotesIfPending().then(function () {
+                    jdd.loadLocalCaseByIndex(lidx);
+                });
                 return;
             }
             var caseId = btn.getAttribute('data-case-id');
@@ -1443,26 +1713,60 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         caseTabsBar.addEventListener('dblclick', function (event) {
-            var btn = event.target.closest('button[data-case-id]');
+            var btn = event.target.closest('button.caseTab');
             if (!btn) {
                 return;
             }
             event.preventDefault();
+            var localIdxStr = btn.getAttribute('data-local-index');
+            if (localIdxStr !== null && localIdxStr !== '') {
+                var idx = parseInt(localIdxStr, 10);
+                if (!jdd.localCaseHandles || !jdd.localCaseHandles[idx]) {
+                    return;
+                }
+                var dirHandle = jdd.localCaseHandles[idx].dirHandle;
+                var leaf = dirHandle.name || '';
+                var name = window.prompt('Rename folder on disk:', leaf);
+                if (name === null) {
+                    return;
+                }
+                name = name.trim();
+                if (!name || name === leaf) {
+                    return;
+                }
+                if (!jdd.isValidCaseSegment(name)) {
+                    window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
+                    return;
+                }
+                jdd.flushNotesIfPending().then(function () {
+                    if (typeof dirHandle.move !== 'function') {
+                        window.alert('Renaming local folders is not supported in this browser.');
+                        return;
+                    }
+                    return dirHandle.move(name).then(function () {
+                        jdd.applyLocalCaseRename(idx, name);
+                    });
+                }).catch(function (err) {
+                    console.error(err);
+                    window.alert(err.message || 'Could not rename folder.');
+                });
+                return;
+            }
             var fromCaseId = btn.getAttribute('data-case-id');
             if (!fromCaseId) {
                 return;
             }
             var parts = fromCaseId.split('/');
-            var leaf = parts[parts.length - 1];
-            var name = window.prompt('Rename folder on disk:', leaf);
-            if (name === null) {
+            var leafSeg = parts[parts.length - 1];
+            var newName = window.prompt('Rename folder on disk:', leafSeg);
+            if (newName === null) {
                 return;
             }
-            name = name.trim();
-            if (!name || name === leaf) {
+            newName = newName.trim();
+            if (!newName || newName === leafSeg) {
                 return;
             }
-            if (!jdd.isValidCaseSegment(name)) {
+            if (!jdd.isValidCaseSegment(newName)) {
                 window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
                 return;
             }
@@ -1470,7 +1774,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return fetch('rename-case.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ fromCaseId: fromCaseId, newLeafName: name })
+                    body: JSON.stringify({ fromCaseId: fromCaseId, newLeafName: newName })
                 }).then(function (r) {
                     return r.json().then(function (body) {
                         if (!r.ok) {
@@ -1490,39 +1794,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    fetch('list-comparisons.php').then(function (r) {
-        return r.ok ? r.json() : { parents: [] };
-    }).then(function (data) {
-        var sel = document.getElementById('folderSelect');
-        if (!sel) {
-            return;
+    var openLocalFolderBtn = document.getElementById('openLocalFolderBtn');
+    if (openLocalFolderBtn) {
+        if (!jdd.supportsLocalFolderPicker()) {
+            openLocalFolderBtn.title = 'Folder picker not available here. Use Chrome/Edge and open via http://localhost (or HTTPS).';
         }
-        var parents = data.parents || [];
-        for (var i = 0; i < parents.length; i++) {
-            var name = parents[i];
-            var opt = document.createElement('option');
-            opt.value = name;
-            opt.textContent = name;
-            sel.appendChild(opt);
-        }
-        var folderParam = jdd.getParameterByName('folder');
-        if (folderParam && parents.indexOf(folderParam.split('/')[0]) >= 0) {
-            sel.value = folderParam.split('/')[0];
-        }
-    }).catch(function () {
-        /* static hosting: no list API */
-    });
-
-    var openFolderBtn = document.getElementById('openFolderBtn');
-    var folderSelect = document.getElementById('folderSelect');
-    if (openFolderBtn && folderSelect) {
-        openFolderBtn.addEventListener('click', function () {
-            var v = folderSelect.value;
-            if (!v) {
-                window.alert('Choose a folder under comparisons/ first.');
-                return;
-            }
-            jdd.loadFolderCases(v);
+        openLocalFolderBtn.addEventListener('click', function () {
+            jdd.loadLocalFolderFromPicker();
         });
     }
 
