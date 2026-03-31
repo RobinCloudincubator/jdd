@@ -247,6 +247,30 @@ textarea.error {
     border-color: #FBC2C4;
 }
 
+.notesSection {
+    margin: 0 0 1.25em 0;
+}
+
+.notesSection label {
+    display: block;
+    margin-bottom: 0.35em;
+    font-weight: 600;
+    color: #333;
+}
+
+textarea.notesField {
+    min-height: 7rem;
+    max-height: 22rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.notesCaseHint {
+    margin-top: 0.5em;
+    font-size: 0.85em;
+    max-width: 40rem;
+}
+
 pre.error {
     background: #FBE3E4;
     color: #D12F19;

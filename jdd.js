@@ -1163,6 +1163,58 @@ var jdd = {
         document.getElementById('textarearight').value='{"Aidan Gillen": {"array": ["Game of Thrones","The Wire"],"string": "some string","int": "2","otherint": 4, "aboolean": "true", "boolean": false,"object": {"foo": "bar"}},"Amy Ryan": ["In Treatment","The Wire"],"Annie Fitzgerald": ["True Blood","Big Love","The Sopranos","Oz"],"Anwan Glover": ["Treme","The Wire"],"Alexander Skarsg?rd": ["Generation Kill","True Blood"],"Alice Farmer": ["The Corner","Oz","The Wire"]}';
     },
 
+    /** When set, notes auto-save to comparisons/<id>/notes.txt via save-notes.php */
+    comparisonCaseId: null,
+
+    loadComparisonCase: function (caseId) {
+        if (!caseId || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$/.test(caseId)) {
+            return;
+        }
+        var base = 'comparisons/' + encodeURIComponent(caseId) + '/';
+        Promise.all([
+            fetch(base + 'left.json').then(function (r) {
+                if (!r.ok) {
+                    throw new Error('missing left.json');
+                }
+                return r.text();
+            }),
+            fetch(base + 'right.json').then(function (r) {
+                if (!r.ok) {
+                    throw new Error('missing right.json');
+                }
+                return r.text();
+            }),
+            fetch(base + 'notes.txt').then(function (r) {
+                return r.ok ? r.text() : '';
+            })
+        ]).then(function (parts) {
+            jdd.comparisonCaseId = caseId;
+            document.getElementById('textarealeft').value = parts[0];
+            document.getElementById('textarearight').value = parts[1];
+            var notesEl = document.getElementById('notesField');
+            if (notesEl) {
+                notesEl.value = parts[2];
+            }
+            jdd.compare();
+        }).catch(function (err) {
+            console.error(err);
+            window.alert('Could not load comparison "' + caseId + '". Ensure comparisons/' + caseId + '/left.json and right.json exist.');
+        });
+    },
+
+    saveNotesToServer: function (caseId, content) {
+        return fetch('save-notes.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ caseId: caseId, content: content })
+        }).then(function (r) {
+            if (!r.ok) {
+                throw new Error('save failed');
+            }
+            return r.json();
+        });
+    },
+
     getParameterByName: function (name) {
         var params = new URLSearchParams(!!window.location.hash ? window.location.hash.substring(1) : window.location.search);
         return params.has(name) ? params.get(name) : '';
@@ -1176,18 +1228,38 @@ document.addEventListener('DOMContentLoaded', function() {
         jdd.compare();
     });
 
-    if (jdd.getParameterByName('left')) {
-        document.getElementById('textarealeft').value=jdd.getParameterByName('left');
+    var caseParam = jdd.getParameterByName('case');
+    if (caseParam) {
+        jdd.loadComparisonCase(caseParam);
+    } else {
+        if (jdd.getParameterByName('left')) {
+            document.getElementById('textarealeft').value=jdd.getParameterByName('left');
+        }
+
+        if (jdd.getParameterByName('right')) {
+            document.getElementById('textarearight').value=jdd.getParameterByName('right');
+        }
+
+        if (jdd.getParameterByName('left') && jdd.getParameterByName('right')) {
+            jdd.compare();
+        }
     }
 
-    if (jdd.getParameterByName('right')) {
-        document.getElementById('textarearight').value=jdd.getParameterByName('right');
+    var notesEl = document.getElementById('notesField');
+    var notesTimer;
+    if (notesEl) {
+        notesEl.addEventListener('input', function () {
+            if (!jdd.comparisonCaseId) {
+                return;
+            }
+            clearTimeout(notesTimer);
+            notesTimer = setTimeout(function () {
+                jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
+                    console.warn('Could not save notes (needs PHP: Docker image or php -S).');
+                });
+            }, 450);
+        });
     }
-
-    if (jdd.getParameterByName('left') && jdd.getParameterByName('right')) {
-        jdd.compare();
-    }
-
 
     document.getElementById('sample').addEventListener('click',function (event) {
         event.preventDefault();
