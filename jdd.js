@@ -1166,11 +1166,117 @@ var jdd = {
     /** When set, notes auto-save to comparisons/<id>/notes.txt via save-notes.php */
     comparisonCaseId: null,
 
-    loadComparisonCase: function (caseId) {
-        if (!caseId || !/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$/.test(caseId)) {
+    /** Debounce handle for notes (cleared on tab switch) */
+    notesSaveTimer: null,
+
+    isValidCaseId: function (caseId) {
+        if (!caseId || typeof caseId !== 'string' || caseId.length > 256) {
+            return false;
+        }
+        return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(\/[a-zA-Z0-9][a-zA-Z0-9_-]{0,63})*$/.test(caseId);
+    },
+
+    encodeCasePath: function (caseId) {
+        return caseId.split('/').map(function (seg) {
+            return encodeURIComponent(seg);
+        }).join('/');
+    },
+
+    flushNotesIfPending: function () {
+        if (jdd.notesSaveTimer) {
+            clearTimeout(jdd.notesSaveTimer);
+            jdd.notesSaveTimer = null;
+        }
+        var notesEl = document.getElementById('notesField');
+        if (!notesEl || !jdd.comparisonCaseId) {
+            return Promise.resolve();
+        }
+        return jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
+            console.warn('Could not save notes before switching.');
+        });
+    },
+
+    /** When using folder mode, list of case ids shown as tabs (or null) */
+    caseTabIds: null,
+
+    updateCaseTabActive: function (caseId) {
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar) {
             return;
         }
-        var base = 'comparisons/' + encodeURIComponent(caseId) + '/';
+        var buttons = bar.querySelectorAll('button[data-case-id]');
+        for (var i = 0; i < buttons.length; i++) {
+            var b = buttons[i];
+            var id = b.getAttribute('data-case-id');
+            if (id === caseId) {
+                b.classList.add('caseTabActive');
+                b.setAttribute('aria-selected', 'true');
+            } else {
+                b.classList.remove('caseTabActive');
+                b.setAttribute('aria-selected', 'false');
+            }
+        }
+    },
+
+    renderCaseTabs: function (caseIds) {
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar) {
+            return;
+        }
+        bar.innerHTML = '';
+        if (!caseIds || caseIds.length === 0) {
+            bar.style.display = 'none';
+            return;
+        }
+        bar.style.display = 'flex';
+        for (var i = 0; i < caseIds.length; i++) {
+            var cid = caseIds[i];
+            var parts = cid.split('/');
+            var label = parts[parts.length - 1];
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'caseTab';
+            btn.setAttribute('data-case-id', cid);
+            btn.setAttribute('role', 'tab');
+            btn.setAttribute('aria-selected', 'false');
+            btn.textContent = label;
+            btn.title = cid;
+            bar.appendChild(btn);
+        }
+    },
+
+    loadFolderCases: function (parentFolder) {
+        if (!jdd.isValidCaseId(parentFolder)) {
+            window.alert('Invalid folder path. Use letters, numbers, underscores, hyphens, and slashes between segments.');
+            return;
+        }
+        fetch('list-comparisons.php?parent=' + encodeURIComponent(parentFolder)).then(function (r) {
+            if (!r.ok) {
+                throw new Error('list failed');
+            }
+            return r.json();
+        }).then(function (data) {
+            var cases = data.cases || [];
+            if (cases.length === 0) {
+                jdd.caseTabIds = null;
+                jdd.renderCaseTabs([]);
+                window.alert('No comparisons found in comparisons/' + parentFolder + '/ (need subfolders or this folder with left.json and right.json).');
+                return;
+            }
+            jdd.caseTabIds = cases;
+            jdd.renderCaseTabs(cases);
+            jdd.loadComparisonCase(cases[0]);
+        }).catch(function (err) {
+            console.error(err);
+            window.alert('Could not list folder (needs PHP: list-comparisons.php).');
+        });
+    },
+
+    loadComparisonCase: function (caseId) {
+        if (!jdd.isValidCaseId(caseId)) {
+            return;
+        }
+        var base = 'comparisons/' + jdd.encodeCasePath(caseId) + '/';
         Promise.all([
             fetch(base + 'left.json').then(function (r) {
                 if (!r.ok) {
@@ -1194,6 +1300,9 @@ var jdd = {
             var notesEl = document.getElementById('notesField');
             if (notesEl) {
                 notesEl.value = parts[2];
+            }
+            if (jdd.caseTabIds) {
+                jdd.updateCaseTabActive(caseId);
             }
             jdd.compare();
         }).catch(function (err) {
@@ -1229,8 +1338,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     var caseParam = jdd.getParameterByName('case');
+    var folderParam = jdd.getParameterByName('folder');
     if (caseParam) {
+        jdd.caseTabIds = null;
+        jdd.renderCaseTabs([]);
         jdd.loadComparisonCase(caseParam);
+    } else if (folderParam) {
+        jdd.loadFolderCases(folderParam);
     } else {
         if (jdd.getParameterByName('left')) {
             document.getElementById('textarealeft').value=jdd.getParameterByName('left');
@@ -1246,18 +1360,71 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     var notesEl = document.getElementById('notesField');
-    var notesTimer;
     if (notesEl) {
         notesEl.addEventListener('input', function () {
             if (!jdd.comparisonCaseId) {
                 return;
             }
-            clearTimeout(notesTimer);
-            notesTimer = setTimeout(function () {
+            clearTimeout(jdd.notesSaveTimer);
+            jdd.notesSaveTimer = setTimeout(function () {
+                jdd.notesSaveTimer = null;
                 jdd.saveNotesToServer(jdd.comparisonCaseId, notesEl.value).catch(function () {
                     console.warn('Could not save notes (needs PHP: Docker image or php -S).');
                 });
             }, 450);
+        });
+    }
+
+    var caseTabsBar = document.getElementById('caseTabsBar');
+    if (caseTabsBar) {
+        caseTabsBar.addEventListener('click', function (event) {
+            var btn = event.target.closest('button[data-case-id]');
+            if (!btn) {
+                return;
+            }
+            var caseId = btn.getAttribute('data-case-id');
+            if (!caseId || caseId === jdd.comparisonCaseId) {
+                return;
+            }
+            jdd.flushNotesIfPending().then(function () {
+                jdd.loadComparisonCase(caseId);
+            });
+        });
+    }
+
+    fetch('list-comparisons.php').then(function (r) {
+        return r.ok ? r.json() : { parents: [] };
+    }).then(function (data) {
+        var sel = document.getElementById('folderSelect');
+        if (!sel) {
+            return;
+        }
+        var parents = data.parents || [];
+        for (var i = 0; i < parents.length; i++) {
+            var name = parents[i];
+            var opt = document.createElement('option');
+            opt.value = name;
+            opt.textContent = name;
+            sel.appendChild(opt);
+        }
+        var folderParam = jdd.getParameterByName('folder');
+        if (folderParam && parents.indexOf(folderParam.split('/')[0]) >= 0) {
+            sel.value = folderParam.split('/')[0];
+        }
+    }).catch(function () {
+        /* static hosting: no list API */
+    });
+
+    var openFolderBtn = document.getElementById('openFolderBtn');
+    var folderSelect = document.getElementById('folderSelect');
+    if (openFolderBtn && folderSelect) {
+        openFolderBtn.addEventListener('click', function () {
+            var v = folderSelect.value;
+            if (!v) {
+                window.alert('Choose a folder under comparisons/ first.');
+                return;
+            }
+            jdd.loadFolderCases(v);
         });
     }
 

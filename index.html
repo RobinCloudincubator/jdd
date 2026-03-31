@@ -48,10 +48,23 @@
                 </div>
             </div>
 
+            <div class="folderBrowserSection">
+                <label for="folderSelect">Browse comparisons folder</label>
+                <div class="folderBrowserRow">
+                    <select id="folderSelect" tabindex="0">
+                        <option value="">— choose a folder —</option>
+                    </select>
+                    <button type="button" id="openFolderBtn">Open subfolders in tabs</button>
+                </div>
+                <p class="weak folderBrowserHint">Picks a directory under <code>comparisons/</code>. If it contains subfolders with <code>left.json</code> and <code>right.json</code>, each opens as a tab below. A folder that is itself one comparison (like <code>example</code>) opens as a single tab. Notes still save to each case’s <code>notes.txt</code> via PHP.</p>
+                <div id="caseTabsBar" class="caseTabsBar" style="display: none;" role="tablist" aria-label="Comparison cases">
+                </div>
+            </div>
+
             <div class="notesSection">
                 <label for="notesField">Notes</label>
                 <textarea id="notesField" class="notesField" placeholder="Jot down findings, URLs, or reminders while comparing…" spellcheck="true" rows="5" tabindex="6"></textarea>
-                <p class="weak notesCaseHint">Optional: open <code>?case=example</code> to load JSON and notes from <code>comparisons/example/</code>. Notes save to <code>notes.txt</code> when PHP is available (see <code>comparisons/README.md</code>).</p>
+                <p class="weak notesCaseHint">Optional: <code>?case=example</code> or <code>?case=batch/case1</code> loads JSON and notes from <code>comparisons/…/</code>. <code>?folder=example</code> opens that folder’s cases as tabs. Notes save to <code>notes.txt</code> when PHP is available (see <code>comparisons/README.md</code>).</p>
             </div>
 
             <div class="initContainer">

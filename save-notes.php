@@ -23,7 +23,13 @@ if (!is_array($data) || !isset($data['caseId'])) {
 $caseId = $data['caseId'];
 $content = isset($data['content']) ? $data['content'] : '';
 
-if (!is_string($caseId) || !preg_match('/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$/', $caseId)) {
+if (!is_string($caseId) || strlen($caseId) > 256) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid caseId']);
+    exit;
+}
+
+if (!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(\/[a-zA-Z0-9][a-zA-Z0-9_-]{0,63})*$/', $caseId)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid caseId']);
     exit;
@@ -41,7 +47,10 @@ if (strlen($content) > 2 * 1024 * 1024) {
     exit;
 }
 
-$dir = __DIR__ . '/comparisons/' . $caseId;
+$dir = __DIR__ . '/comparisons';
+foreach (explode('/', $caseId) as $seg) {
+    $dir .= '/' . $seg;
+}
 $notesPath = $dir . '/notes.txt';
 
 if (!is_dir($dir)) {

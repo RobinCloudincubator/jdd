@@ -271,6 +271,63 @@ textarea.notesField {
     max-width: 40rem;
 }
 
+.folderBrowserSection {
+    margin: 0 0 1.25em 0;
+}
+
+.folderBrowserSection label {
+    display: block;
+    margin-bottom: 0.35em;
+    font-weight: 600;
+    color: #333;
+}
+
+.folderBrowserRow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.folderBrowserRow select {
+    font-size: 1rem;
+    padding: 0.35rem 0.5rem;
+    min-width: 14rem;
+}
+
+.folderBrowserHint {
+    margin-top: 0.5em;
+    font-size: 0.85em;
+    max-width: 42rem;
+}
+
+.caseTabsBar {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.75em;
+    align-items: flex-end;
+}
+
+button.caseTab {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.65rem;
+    margin: 0;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    color: #333;
+}
+
+button.caseTab:hover {
+    background: #eaeaea;
+}
+
+button.caseTab.caseTabActive {
+    border-color: #36c;
+    color: #36c;
+    background: #fff;
+    font-weight: 600;
+}
+
 pre.error {
     background: #FBE3E4;
     color: #D12F19;

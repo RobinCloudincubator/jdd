@@ -1,0 +1,3 @@
+Example notes (tracked in git).
+
+Edit here or in the browser with ?case=example — auto-save needs PHP (Docker or php -S). testeste wef  lalalala
