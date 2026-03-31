@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+require_once __DIR__ . '/case-path-validation.php';
+
 $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);
 
@@ -23,13 +25,7 @@ if (!is_array($data) || !isset($data['caseId'])) {
 $caseId = $data['caseId'];
 $content = isset($data['content']) ? $data['content'] : '';
 
-if (!is_string($caseId) || strlen($caseId) > 256) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid caseId']);
-    exit;
-}
-
-if (!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(\/[a-zA-Z0-9][a-zA-Z0-9_-]{0,63})*$/', $caseId)) {
+if (!valid_case_id($caseId)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid caseId']);
     exit;

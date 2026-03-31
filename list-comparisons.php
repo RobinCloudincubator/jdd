@@ -6,9 +6,7 @@
  */
 header('Content-Type: application/json; charset=utf-8');
 
-function valid_segment($s) {
-    return is_string($s) && preg_match('/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$/', $s);
-}
+require_once __DIR__ . '/case-path-validation.php';
 
 function is_case_dir($dir) {
     return is_file($dir . '/left.json') && is_file($dir . '/right.json');
@@ -30,7 +28,7 @@ if ($parent === '') {
             continue;
         }
         $p = $comparisonsRoot . '/' . $f;
-        if (is_dir($p) && valid_segment($f)) {
+        if (is_dir($p) && valid_case_segment($f)) {
             $parents[] = $f;
         }
     }
@@ -42,7 +40,7 @@ if ($parent === '') {
 $segments = explode('/', $parent);
 $base = $comparisonsRoot;
 foreach ($segments as $seg) {
-    if (!valid_segment($seg)) {
+    if (!valid_case_segment($seg)) {
         http_response_code(400);
         echo json_encode(['error' => 'Invalid parent']);
         exit;
@@ -62,7 +60,7 @@ foreach (scandir($base) as $f) {
         continue;
     }
     $sub = $base . '/' . $f;
-    if (!is_dir($sub) || !valid_segment($f)) {
+    if (!is_dir($sub) || !valid_case_segment($f)) {
         continue;
     }
     if (is_case_dir($sub)) {

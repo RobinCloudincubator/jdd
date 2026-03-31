@@ -1169,11 +1169,63 @@ var jdd = {
     /** Debounce handle for notes (cleared on tab switch) */
     notesSaveTimer: null,
 
-    isValidCaseId: function (caseId) {
-        if (!caseId || typeof caseId !== 'string' || caseId.length > 256) {
+    /** One path segment: no / or \\, not . or .., no ASCII control chars; spaces and Unicode OK (matches PHP). */
+    isValidCaseSegment: function (s) {
+        if (typeof s !== 'string' || s === '' || s.length > 255) {
             return false;
         }
-        return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(\/[a-zA-Z0-9][a-zA-Z0-9_-]{0,63})*$/.test(caseId);
+        if (s === '.' || s === '..') {
+            return false;
+        }
+        if (/[\x00\/\\]/.test(s)) {
+            return false;
+        }
+        if (/[\x00-\x1f\x7f]/.test(s)) {
+            return false;
+        }
+        return true;
+    },
+
+    isValidCaseId: function (caseId) {
+        if (!caseId || typeof caseId !== 'string' || caseId.length > 2048) {
+            return false;
+        }
+        var parts = caseId.split('/');
+        var i;
+        for (i = 0; i < parts.length; i++) {
+            if (parts[i] === '' || !jdd.isValidCaseSegment(parts[i])) {
+                return false;
+            }
+        }
+        return parts.length >= 1;
+    },
+
+    applyCaseRename: function (fromId, toId) {
+        if (jdd.caseTabIds) {
+            var idx = jdd.caseTabIds.indexOf(fromId);
+            if (idx >= 0) {
+                jdd.caseTabIds[idx] = toId;
+            }
+        }
+        if (jdd.comparisonCaseId === fromId) {
+            jdd.comparisonCaseId = toId;
+        }
+        var bar = document.getElementById('caseTabsBar');
+        if (!bar) {
+            return;
+        }
+        var buttons = bar.querySelectorAll('button[data-case-id]');
+        for (var i = 0; i < buttons.length; i++) {
+            var b = buttons[i];
+            if (b.getAttribute('data-case-id') === fromId) {
+                b.setAttribute('data-case-id', toId);
+                var parts = toId.split('/');
+                b.textContent = parts[parts.length - 1];
+                b.title = toId + ' — double-click to rename';
+                break;
+            }
+        }
+        jdd.updateCaseTabActive(jdd.comparisonCaseId);
     },
 
     encodeCasePath: function (caseId) {
@@ -1240,14 +1292,14 @@ var jdd = {
             btn.setAttribute('role', 'tab');
             btn.setAttribute('aria-selected', 'false');
             btn.textContent = label;
-            btn.title = cid;
+            btn.title = cid + ' — double-click to rename';
             bar.appendChild(btn);
         }
     },
 
     loadFolderCases: function (parentFolder) {
         if (!jdd.isValidCaseId(parentFolder)) {
-            window.alert('Invalid folder path. Use letters, numbers, underscores, hyphens, and slashes between segments.');
+            window.alert('Invalid folder path. Segments cannot contain slashes in the name; use / only between folders. Avoid . and .. as names.');
             return;
         }
         fetch('list-comparisons.php?parent=' + encodeURIComponent(parentFolder)).then(function (r) {
@@ -1388,6 +1440,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             jdd.flushNotesIfPending().then(function () {
                 jdd.loadComparisonCase(caseId);
+            });
+        });
+        caseTabsBar.addEventListener('dblclick', function (event) {
+            var btn = event.target.closest('button[data-case-id]');
+            if (!btn) {
+                return;
+            }
+            event.preventDefault();
+            var fromCaseId = btn.getAttribute('data-case-id');
+            if (!fromCaseId) {
+                return;
+            }
+            var parts = fromCaseId.split('/');
+            var leaf = parts[parts.length - 1];
+            var name = window.prompt('Rename folder on disk:', leaf);
+            if (name === null) {
+                return;
+            }
+            name = name.trim();
+            if (!name || name === leaf) {
+                return;
+            }
+            if (!jdd.isValidCaseSegment(name)) {
+                window.alert('Invalid name: no slashes or backslashes, not . or .., no control characters, max 255 characters per folder name.');
+                return;
+            }
+            jdd.flushNotesIfPending().then(function () {
+                return fetch('rename-case.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fromCaseId: fromCaseId, newLeafName: name })
+                }).then(function (r) {
+                    return r.json().then(function (body) {
+                        if (!r.ok) {
+                            throw new Error(body.error || 'Rename failed');
+                        }
+                        return body;
+                    });
+                });
+            }).then(function (body) {
+                if (body && body.toCaseId) {
+                    jdd.applyCaseRename(fromCaseId, body.toCaseId);
+                }
+            }).catch(function (err) {
+                console.error(err);
+                window.alert(err.message || 'Could not rename folder (needs PHP and write access).');
             });
         });
     }
