@@ -1,0 +1,1 @@
+!!! Interessanter Unterschied bei Linux CentOS: Sonnet findet korrekte CPE und ändert manufacturer
