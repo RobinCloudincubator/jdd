@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": "Google Pixel 4",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "Google",
+      "operatingSystemVersion": null,
+      "class": "Smartphone",
+      "id": "171377",
+      "product": "Pixel 4"
+    }
+  ],
+  "id": "171377",
+  "type": "Smartphone"
+}

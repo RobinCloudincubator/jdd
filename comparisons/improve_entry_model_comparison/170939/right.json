@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": null,
+      "description": "Cisco UCS B200 M4 Server",
+      "isSoftware": false,
+      "manufacturer": "Cisco",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "B200 M4"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": "cpe:2.3:o:vmware:esxi:7.0:*:*:*:*:*:*:*",
+      "description": "VMware ESXi 7.0",
+      "isSoftware": true,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "VMware ESXi 7.0"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "CPU",
+      "cpe": null,
+      "description": "Intel Xeon E5-2697A v4 CPU",
+      "isSoftware": false,
+      "manufacturer": "Intel",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "Intel Xeon E5-2697A v4"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "externe HDD (Sammler)"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "interne HDD (Sammler)"
+    }
+  ],
+  "id": "170939",
+  "type": "Server"
+}

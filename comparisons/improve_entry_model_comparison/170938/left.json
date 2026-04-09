@@ -1,0 +1,50 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": null,
+      "description": "Cisco UCS B200 M4 Blade Server",
+      "isSoftware": false,
+      "manufacturer": "Cisco",
+      "operatingSystem": "VMware ESXi",
+      "operatingSystemVersion": "7.0",
+      "id": "170938",
+      "product": "UCS B200 M4"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": "cpe:2.3:o:vmware:esxi:7.0:*:*:*:*:*:*:*",
+      "description": "VMware ESXi 7.0 Hypervisor",
+      "isSoftware": true,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170938",
+      "product": "VMware ESXi 7.0"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": null,
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170938",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "CPU",
+      "cpe": "cpe:2.3:h:intel:xeon_e5-2690_v4:-:*:*:*:*:*:*:*",
+      "description": "Intel Xeon E5-2690 v4 CPU (14-core, 2.6 GHz base frequency)",
+      "isSoftware": false,
+      "manufacturer": "Intel",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170938",
+      "product": "Intel Xeon E5-2690 v4"
+    }
+  ],
+  "id": "170938",
+  "type": "Server"
+}

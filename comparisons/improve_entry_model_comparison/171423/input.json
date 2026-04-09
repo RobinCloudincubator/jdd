@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": "Samsung Galaxy S9+",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "Samsung",
+      "operatingSystemVersion": null,
+      "class": "Smartphone",
+      "id": "171423",
+      "product": "Galaxy S9+"
+    }
+  ],
+  "id": "171423",
+  "type": "Smartphone"
+}

@@ -1,0 +1,61 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": "cpe:2.3:h:dell:vxrail_p670f:-:*:*:*:*:*:*:*",
+      "description": null,
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "171125",
+      "product": "VxRail P670F"
+    },
+    {
+      "class": "CPU",
+      "cpe": "cpe:2.3:h:intel:xeon_gold_6348:-:*:*:*:*:*:*:*",
+      "description": null,
+      "isSoftware": false,
+      "manufacturer": null,
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "171125",
+      "product": "Intel Xeon Gold 6348 2.6G"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "171125",
+      "product": "28C/ 56T"
+    },
+    {
+      "class": "Power-Switch / Netzteil",
+      "cpe": null,
+      "description": "Primäres-Netzteil 1100 Watt",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "171125",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "Power-Switch / Netzteil",
+      "cpe": null,
+      "description": "Sekundäres-Netzteil 1100 Watt",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "171125",
+      "product": "Primäres-Netzteil 1100 Watt,Sekundäres-Netzteil 1100 Watt"
+    }
+  ],
+  "id": "171125",
+  "type": "Server"
+}

@@ -1,0 +1,106 @@
+{
+  "components": [
+    {
+      "description": "Lenovo ThinkPad T14 Gen4 21HD",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Lenovo",
+      "operatingSystemVersion": null,
+      "class": "Notebook System",
+      "id": "169155",
+      "product": "ThinkPad T14 Gen4"
+    },
+    {
+      "description": "24 Zoll",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Monitor",
+      "id": "169155",
+      "product": "UltraSharp U2415"
+    },
+    {
+      "description": "24 Zoll",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Monitor",
+      "id": "169155",
+      "product": "UltraSharp U2415"
+    },
+    {
+      "description": "24 Zoll",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Monitor",
+      "id": "169155",
+      "product": "UltraSharp U2415"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Microsoft",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "_Basis_Lager_Microsoft InternetExplorer 11 32bit"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "7-Zip",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "7-Zip 9.2"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Irfan View",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "IrfanView 4.3"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Corel",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "MindManager Pool 2021"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Corel",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "Mind Manager Pro"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "VLC",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169155",
+      "product": "VLC Player 2.1.3"
+    }
+  ],
+  "id": "169155",
+  "type": "Notebook"
+}

@@ -1,0 +1,86 @@
+{
+  "components": [
+    {
+      "description": "VM auf Basis von VMware",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Virtueller Server",
+      "id": "169443",
+      "product": "Virtueller Server (VMware)"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Apache",
+      "operatingSystemVersion": null,
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "id": "169443",
+      "product": "Apache 2.4"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "PHP Foundation",
+      "operatingSystemVersion": null,
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "id": "169443",
+      "product": "PHP (DSV) 7.3"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Oracle",
+      "operatingSystemVersion": null,
+      "class": "Database",
+      "id": "169443",
+      "product": "MySQL 5.6"
+    },
+    {
+      "description": "-",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "CPU",
+      "id": "169443",
+      "product": "vCPU"
+    },
+    {
+      "description": "RAM für VMs; Einheit in GB",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Memory Module",
+      "id": "169443",
+      "product": "vRAM"
+    },
+    {
+      "description": "Provisionierter Plattenspeicher in VMware",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "unbekannt",
+      "operatingSystemVersion": null,
+      "class": "Storage Device",
+      "id": "169443",
+      "product": "vSpace"
+    },
+    {
+      "description": "Interne Anmerkung 08.11.2016: Neu aufgenommen.\n Interne Anmerkung 13.02.2018: EoS von 30.06.2024 auf 30.06.2023 und EoL von unbekannt auf 30.06.2024 angepasst.",
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "RedHat",
+      "operatingSystemVersion": null,
+      "class": "Operating System Software",
+      "id": "169443",
+      "product": "CentOS Linux 7"
+    }
+  ],
+  "id": "169443",
+  "type": "Virtueller Server (VMware)"
+}

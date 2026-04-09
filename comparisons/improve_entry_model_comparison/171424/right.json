@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "class": "Smartphone",
+      "cpe": "cpe:2.3:h:samsung:galaxy_s6_edge:-:*:*:*:*:*:*:*",
+      "description": "Samsung Galaxy S6 edge",
+      "isSoftware": null,
+      "manufacturer": "Samsung",
+      "operatingSystem": "Android",
+      "operatingSystemVersion": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "id": "171424",
+      "product": "Galaxy S6 edge"
+    }
+  ],
+  "id": "171424",
+  "type": "Smartphone"
+}

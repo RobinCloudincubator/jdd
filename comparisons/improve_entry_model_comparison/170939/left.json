@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": null,
+      "description": "Cisco UCS B200 M4 Blade Server",
+      "isSoftware": false,
+      "manufacturer": "Cisco",
+      "operatingSystem": "VMware ESXi",
+      "operatingSystemVersion": "7.0",
+      "id": "170939",
+      "product": "UCS B200 M4"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": "cpe:2.3:o:vmware:esxi:7.0:*:*:*:*:*:*:*",
+      "description": "VMware ESXi 7.0 Hypervisor Operating System",
+      "isSoftware": true,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "VMware ESXi 7.0"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "CPU",
+      "cpe": "cpe:2.3:h:intel:xeon_e5-2697a_v4:-:*:*:*:*:*:*:*",
+      "description": "Intel Xeon E5-2697A v4 Processor",
+      "isSoftware": false,
+      "manufacturer": "Intel",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "Intel Xeon E5-2697A v4"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "externe HDD (Sammler)"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170939",
+      "product": "interne HDD (Sammler)"
+    }
+  ],
+  "id": "170939",
+  "type": "Server"
+}

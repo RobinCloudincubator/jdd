@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": "Samsung Galaxy S6 edge",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "Samsung",
+      "operatingSystemVersion": null,
+      "class": "Smartphone",
+      "id": "171424",
+      "product": "Galaxy S6 edge"
+    }
+  ],
+  "id": "171424",
+  "type": "Smartphone"
+}

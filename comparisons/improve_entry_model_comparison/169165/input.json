@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": "Lenovo ThinkPad T16 Gen2 21HH",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Lenovo",
+      "operatingSystemVersion": null,
+      "class": "Notebook System",
+      "id": "169165",
+      "product": "ThinkPad T16 Gen.2"
+    }
+  ],
+  "id": "169165",
+  "type": "Notebook"
+}

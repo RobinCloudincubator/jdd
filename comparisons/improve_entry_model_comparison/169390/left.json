@@ -1,0 +1,17 @@
+{
+  "components": [
+    {
+      "class": "Mobil Wlan Router",
+      "cpe": null,
+      "description": "Huawei Mobile WiFi Pro 2 - Mobiler WLAN-Router",
+      "isSoftware": "false",
+      "manufacturer": "Huawei",
+      "operatingSystem": "Huawei Mobile WiFi OS",
+      "operatingSystemVersion": null,
+      "id": "169390",
+      "product": "Mobile WiFi Pro 2"
+    }
+  ],
+  "id": "169390",
+  "type": "Mobil Wlan Router"
+}

@@ -1,0 +1,61 @@
+{
+  "components": [
+    {
+      "class": "CPU",
+      "cpe": null,
+      "description": "-",
+      "isSoftware": false,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169982",
+      "product": "vCPU"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für VMs; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169982",
+      "product": "vRAM"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Provisionierter Plattenspeicher in VMware",
+      "isSoftware": null,
+      "manufacturer": "unbekannt",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169982",
+      "product": "vSpace"
+    },
+    {
+      "class": "Virtueller Server",
+      "cpe": null,
+      "description": "VM auf Basis von VMware",
+      "isSoftware": false,
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169982",
+      "product": "Virtueller Server (VMware)"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": "cpe:2.3:o:microsoft:windows_server:*:*:*:*:*:*:*:*",
+      "description": null,
+      "isSoftware": true,
+      "manufacturer": "Microsoft",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169982",
+      "product": "Microsoft Windows Server 2016 Standard"
+    }
+  ],
+  "id": "169982",
+  "type": "Virtueller Server (VMware)"
+}

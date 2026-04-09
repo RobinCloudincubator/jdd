@@ -1,0 +1,66 @@
+{
+  "components": [
+    {
+      "description": "B200 M4",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Cisco",
+      "operatingSystemVersion": null,
+      "class": "Server",
+      "id": "170939",
+      "product": "B200 M4"
+    },
+    {
+      "description": "VMware ESXi 7.0",
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Operating System Software",
+      "id": "170939",
+      "product": "VMware ESXi 7.0"
+    },
+    {
+      "description": "RAM für physische Sever; Einheit in GB",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "N/A",
+      "operatingSystemVersion": null,
+      "class": "Memory Module",
+      "id": "170939",
+      "product": "RAM (physisch)"
+    },
+    {
+      "description": "-",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": null,
+      "operatingSystemVersion": null,
+      "class": "CPU",
+      "id": "170939",
+      "product": "Intel Xeon E5-2697A v4"
+    },
+    {
+      "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "N/A",
+      "operatingSystemVersion": null,
+      "class": "Storage Device",
+      "id": "170939",
+      "product": "externe HDD (Sammler)"
+    },
+    {
+      "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "N/A",
+      "operatingSystemVersion": null,
+      "class": "Storage Device",
+      "id": "170939",
+      "product": "interne HDD (Sammler)"
+    }
+  ],
+  "id": "170939",
+  "type": "Server"
+}

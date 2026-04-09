@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "description": "B200 M4",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Cisco",
+      "operatingSystemVersion": null,
+      "class": "Server",
+      "id": "170938",
+      "product": "B200 M4"
+    },
+    {
+      "description": "VMware ESXi 7.0",
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Operating System Software",
+      "id": "170938",
+      "product": "VMware ESXi 7.0"
+    },
+    {
+      "description": "RAM für physische Sever; Einheit in GB",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "N/A",
+      "operatingSystemVersion": null,
+      "class": "Memory Module",
+      "id": "170938",
+      "product": "RAM (physisch)"
+    },
+    {
+      "description": "-",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": null,
+      "operatingSystemVersion": null,
+      "class": "CPU",
+      "id": "170938",
+      "product": "Intel Xeon E5-2690 v4"
+    }
+  ],
+  "id": "170938",
+  "type": "Server"
+}

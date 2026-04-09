@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "description": "Lenovo ThinkPad X1 Yoga Gen7 21CD",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Lenovo",
+      "operatingSystemVersion": null,
+      "class": "Notebook System",
+      "id": "169131",
+      "product": "ThinkPad X1 Gen.7"
+    },
+    {
+      "description": "24 Zoll",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Monitor",
+      "id": "169131",
+      "product": "UltraSharp U2413"
+    },
+    {
+      "description": "24 Zoll",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Monitor",
+      "id": "169131",
+      "product": "UltraSharp U2415"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Citrix",
+      "operatingSystemVersion": null,
+      "class": "Software Lizenz",
+      "id": "169131",
+      "product": "Citrix GoToMeeting"
+    }
+  ],
+  "id": "169131",
+  "type": "Notebook"
+}

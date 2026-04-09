@@ -1,0 +1,1 @@
+Test Anthropic Sonnet vs Nova Pro model for improving cmdb entries.

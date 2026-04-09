@@ -1,0 +1,17 @@
+{
+  "components": [
+    {
+      "class": "Desktop",
+      "cpe": "cpe:2.3:h:dell:optiplex_7060:-:*:*:*:*:*:*:*",
+      "description": "Dell Optiplex 7060 Desktop",
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "168109",
+      "product": "Optiplex 7060"
+    }
+  ],
+  "id": "168109",
+  "type": "Fat Client"
+}

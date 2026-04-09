@@ -1,0 +1,818 @@
+[
+  {
+    "components": [
+      {
+        "description": null,
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Desktop",
+        "id": "168109",
+        "product": "Optiplex 7060"
+      }
+    ],
+    "id": "168109",
+    "type": "Fat Client"
+  },
+  {
+    "components": [
+      {
+        "description": "Lenovo ThinkPad X1 Yoga Gen7 21CD",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Lenovo",
+        "operatingSystemVersion": null,
+        "class": "Notebook System",
+        "id": "169131",
+        "product": "ThinkPad X1 Gen.7"
+      },
+      {
+        "description": "24 Zoll",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Monitor",
+        "id": "169131",
+        "product": "UltraSharp U2413"
+      },
+      {
+        "description": "24 Zoll",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Monitor",
+        "id": "169131",
+        "product": "UltraSharp U2415"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Citrix",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169131",
+        "product": "Citrix GoToMeeting"
+      }
+    ],
+    "id": "169131",
+    "type": "Notebook"
+  },
+  {
+    "components": [
+      {
+        "description": null,
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Notebook System",
+        "id": "169134",
+        "product": "E5570"
+      }
+    ],
+    "id": "169134",
+    "type": "Notebook"
+  },
+  {
+    "components": [
+      {
+        "description": "Lenovo ThinkPad T14 Gen4 21HD",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Lenovo",
+        "operatingSystemVersion": null,
+        "class": "Notebook System",
+        "id": "169155",
+        "product": "ThinkPad T14 Gen4"
+      },
+      {
+        "description": "24 Zoll",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Monitor",
+        "id": "169155",
+        "product": "UltraSharp U2415"
+      },
+      {
+        "description": "24 Zoll",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Monitor",
+        "id": "169155",
+        "product": "UltraSharp U2415"
+      },
+      {
+        "description": "24 Zoll",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Monitor",
+        "id": "169155",
+        "product": "UltraSharp U2415"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Microsoft",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "_Basis_Lager_Microsoft InternetExplorer 11 32bit"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "7-Zip",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "7-Zip 9.2"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Irfan View",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "IrfanView 4.3"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Corel",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "MindManager Pool 2021"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Corel",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "Mind Manager Pro"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "VLC",
+        "operatingSystemVersion": null,
+        "class": "Software Lizenz",
+        "id": "169155",
+        "product": "VLC Player 2.1.3"
+      }
+    ],
+    "id": "169155",
+    "type": "Notebook"
+  },
+  {
+    "components": [
+      {
+        "description": "Lenovo ThinkPad T16 Gen2 21HH",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Lenovo",
+        "operatingSystemVersion": null,
+        "class": "Notebook System",
+        "id": "169165",
+        "product": "ThinkPad T16 Gen.2"
+      }
+    ],
+    "id": "169165",
+    "type": "Notebook"
+  },
+  {
+    "components": [
+      {
+        "description": "Huawei Speedbox mini II (Telekom)",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "HUAWEI",
+        "operatingSystemVersion": null,
+        "class": "Mobil Wlan Router",
+        "id": "169356",
+        "product": "Speedbox mini II (Telekom)"
+      }
+    ],
+    "id": "169356",
+    "type": "Mobil Wlan Router"
+  },
+  {
+    "components": [
+      {
+        "description": "Huawei Mobile WiFi Pro 2",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "HUAWEI",
+        "operatingSystemVersion": null,
+        "class": "Mobil Wlan Router",
+        "id": "169390",
+        "product": "Mobile WiFi Pro 2"
+      }
+    ],
+    "id": "169390",
+    "type": "Mobil Wlan Router"
+  },
+  {
+    "components": [
+      {
+        "description": "VM auf Basis von VMware",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Virtueller Server",
+        "id": "169441",
+        "product": "Virtueller Server (VMware)"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Apache",
+        "operatingSystemVersion": null,
+        "class": "DSV-Middleware wie z. B. Application Server",
+        "id": "169441",
+        "product": "Apache 2.4"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "PHP Foundation",
+        "operatingSystemVersion": null,
+        "class": "DSV-Middleware wie z. B. Application Server",
+        "id": "169441",
+        "product": "PHP (DSV) 7.3"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "169441",
+        "product": "vCPU"
+      },
+      {
+        "description": "RAM für VMs; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "169441",
+        "product": "vRAM"
+      },
+      {
+        "description": "Provisionierter Plattenspeicher in VMware",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "unbekannt",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "169441",
+        "product": "vSpace"
+      },
+      {
+        "description": "SUSE Linux Enterprise Server 15 SP4",
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "SUSE",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "169441",
+        "product": "SUSE Linux Enterprise Server 15 SP4"
+      }
+    ],
+    "id": "169441",
+    "type": "Virtueller Server (VMware)"
+  },
+  {
+    "components": [
+      {
+        "description": "VM auf Basis von VMware",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Virtueller Server",
+        "id": "169443",
+        "product": "Virtueller Server (VMware)"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Apache",
+        "operatingSystemVersion": null,
+        "class": "DSV-Middleware wie z. B. Application Server",
+        "id": "169443",
+        "product": "Apache 2.4"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "PHP Foundation",
+        "operatingSystemVersion": null,
+        "class": "DSV-Middleware wie z. B. Application Server",
+        "id": "169443",
+        "product": "PHP (DSV) 7.3"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Oracle",
+        "operatingSystemVersion": null,
+        "class": "Database",
+        "id": "169443",
+        "product": "MySQL 5.6"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "169443",
+        "product": "vCPU"
+      },
+      {
+        "description": "RAM für VMs; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "169443",
+        "product": "vRAM"
+      },
+      {
+        "description": "Provisionierter Plattenspeicher in VMware",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "unbekannt",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "169443",
+        "product": "vSpace"
+      },
+      {
+        "description": "Interne Anmerkung 08.11.2016: Neu aufgenommen.\n Interne Anmerkung 13.02.2018: EoS von 30.06.2024 auf 30.06.2023 und EoL von unbekannt auf 30.06.2024 angepasst.",
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "RedHat",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "169443",
+        "product": "CentOS Linux 7"
+      }
+    ],
+    "id": "169443",
+    "type": "Virtueller Server (VMware)"
+  },
+  {
+    "components": [
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "169982",
+        "product": "vCPU"
+      },
+      {
+        "description": "RAM für VMs; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "169982",
+        "product": "vRAM"
+      },
+      {
+        "description": "Provisionierter Plattenspeicher in VMware",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "unbekannt",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "169982",
+        "product": "vSpace"
+      },
+      {
+        "description": "VM auf Basis von VMware",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Virtueller Server",
+        "id": "169982",
+        "product": "Virtueller Server (VMware)"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Microsoft",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "169982",
+        "product": "Microsoft Windows Server 2016 Standard"
+      }
+    ],
+    "id": "169982",
+    "type": "Virtueller Server (VMware)"
+  },
+  {
+    "components": [
+      {
+        "description": "B200 M4",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Cisco",
+        "operatingSystemVersion": null,
+        "class": "Server",
+        "id": "170938",
+        "product": "B200 M4"
+      },
+      {
+        "description": "VMware ESXi 7.0",
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "170938",
+        "product": "VMware ESXi 7.0"
+      },
+      {
+        "description": "RAM für physische Sever; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "170938",
+        "product": "RAM (physisch)"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": null,
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "170938",
+        "product": "Intel Xeon E5-2690 v4"
+      }
+    ],
+    "id": "170938",
+    "type": "Server"
+  },
+  {
+    "components": [
+      {
+        "description": "B200 M4",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Cisco",
+        "operatingSystemVersion": null,
+        "class": "Server",
+        "id": "170939",
+        "product": "B200 M4"
+      },
+      {
+        "description": "VMware ESXi 7.0",
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "VMware",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "170939",
+        "product": "VMware ESXi 7.0"
+      },
+      {
+        "description": "RAM für physische Sever; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "170939",
+        "product": "RAM (physisch)"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": null,
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "170939",
+        "product": "Intel Xeon E5-2697A v4"
+      },
+      {
+        "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "170939",
+        "product": "externe HDD (Sammler)"
+      },
+      {
+        "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "170939",
+        "product": "interne HDD (Sammler)"
+      }
+    ],
+    "id": "170939",
+    "type": "Server"
+  },
+  {
+    "components": [
+      {
+        "description": "T420",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Server",
+        "id": "170988",
+        "product": "T420"
+      },
+      {
+        "description": "RAM für physische Sever; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "170988",
+        "product": "RAM (physisch)"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": null,
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "170988",
+        "product": "Intel Xeon E5-2440"
+      }
+    ],
+    "id": "170988",
+    "type": "Server"
+  },
+  {
+    "components": [
+      {
+        "description": "B200 M4",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Cisco",
+        "operatingSystemVersion": null,
+        "class": "Server",
+        "id": "170989",
+        "product": "B200 M4"
+      },
+      {
+        "description": "RAM für physische Sever; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "170989",
+        "product": "RAM (physisch)"
+      },
+      {
+        "description": "-",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": null,
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "170989",
+        "product": "Intel Xeon E5-2660 v3"
+      },
+      {
+        "description": null,
+        "isSoftware": true,
+        "operatingSystem": null,
+        "manufacturer": "Citrix",
+        "operatingSystemVersion": null,
+        "class": "Operating System Software",
+        "id": "170989",
+        "product": "XenServer Hypervisor 8.2 LTSR (SMS)"
+      },
+      {
+        "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "170989",
+        "product": "interne HDD (Sammler)"
+      },
+      {
+        "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Storage Device",
+        "id": "170989",
+        "product": "externe HDD (Sammler)"
+      }
+    ],
+    "id": "170989",
+    "type": "Server"
+  },
+  {
+    "components": [
+      {
+        "description": null,
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Dell",
+        "operatingSystemVersion": null,
+        "class": "Server",
+        "id": "171125",
+        "product": "VxRail P670F"
+      },
+      {
+        "description": null,
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": null,
+        "operatingSystemVersion": null,
+        "class": "CPU",
+        "id": "171125",
+        "product": "Intel Xeon Gold 6348 2.6G"
+      },
+      {
+        "description": "RAM für physische Sever; Einheit in GB",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Memory Module",
+        "id": "171125",
+        "product": "28C/ 56T"
+      },
+      {
+        "description": "Primäres-Netzteil 1100 Watt",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Power-Switch / Netzteil",
+        "id": "171125",
+        "product": "RAM (physisch)"
+      },
+      {
+        "description": "Sekundäres-Netzteil 1100 Watt",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "N/A",
+        "operatingSystemVersion": null,
+        "class": "Power-Switch / Netzteil",
+        "id": "171125",
+        "product": "Primäres-Netzteil 1100 Watt,Sekundäres-Netzteil 1100 Watt"
+      }
+    ],
+    "id": "171125",
+    "type": "Server"
+  },
+  {
+    "components": [
+      {
+        "description": "Apple iPhone 11",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "Apple",
+        "operatingSystemVersion": null,
+        "class": "Smartphone",
+        "id": "171376",
+        "product": "iPhone 11"
+      }
+    ],
+    "id": "171376",
+    "type": "Smartphone"
+  },
+  {
+    "components": [
+      {
+        "description": "Google Pixel 4",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "Google",
+        "operatingSystemVersion": null,
+        "class": "Smartphone",
+        "id": "171377",
+        "product": "Pixel 4"
+      }
+    ],
+    "id": "171377",
+    "type": "Smartphone"
+  },
+  {
+    "components": [
+      {
+        "description": "Samsung Galaxy S9+",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "Samsung",
+        "operatingSystemVersion": null,
+        "class": "Smartphone",
+        "id": "171423",
+        "product": "Galaxy S9+"
+      }
+    ],
+    "id": "171423",
+    "type": "Smartphone"
+  },
+  {
+    "components": [
+      {
+        "description": "Samsung Galaxy S6 edge",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "Samsung",
+        "operatingSystemVersion": null,
+        "class": "Smartphone",
+        "id": "171424",
+        "product": "Galaxy S6 edge"
+      }
+    ],
+    "id": "171424",
+    "type": "Smartphone"
+  },
+  {
+    "components": [
+      {
+        "description": "Apple iPad Pro 10,5 Zoll (2. Gen) 256 GB",
+        "isSoftware": null,
+        "operatingSystem": null,
+        "manufacturer": "Apple",
+        "operatingSystemVersion": null,
+        "class": "Tablet Computer",
+        "id": "172723",
+        "product": "iPad Pro 10,5 Zoll (2. Gen) 256 GB"
+      }
+    ],
+    "id": "172723",
+    "type": "Tablet"
+  },
+  {
+    "components": [
+      {
+        "description": "Apple Watch Serie 6",
+        "isSoftware": false,
+        "operatingSystem": null,
+        "manufacturer": "Apple",
+        "operatingSystemVersion": null,
+        "class": "Smartwatch",
+        "id": "172845",
+        "product": "Watch Serie 6"
+      }
+    ],
+    "id": "172845",
+    "type": "Smartwatch"
+  }
+]

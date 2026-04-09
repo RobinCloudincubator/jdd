@@ -1,0 +1,83 @@
+{
+  "components": [
+    {
+      "description": "VM auf Basis von VMware",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Virtueller Server",
+      "id": "169441",
+      "product": "Virtueller Server (VMware)",
+      "cpe": null
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "Apache",
+      "operatingSystemVersion": null,
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "id": "169441",
+      "product": "Apache 2.4",
+      "cpe": "cpe:2.3:a:apache:http_server:2.4.0:*:*:*:*:*:*:*"
+    },
+    {
+      "description": null,
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "PHP Foundation",
+      "operatingSystemVersion": null,
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "id": "169441",
+      "product": "PHP (DSV) 7.3",
+      "cpe": "cpe:2.3:a:php:php:7.3.0:*:*:*:*:*:*:*"
+    },
+    {
+      "description": "-",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "CPU",
+      "id": "169441",
+      "product": "vCPU",
+      "cpe": null
+    },
+    {
+      "description": "RAM für VMs; Einheit in GB",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "VMware",
+      "operatingSystemVersion": null,
+      "class": "Memory Module",
+      "id": "169441",
+      "product": "vRAM",
+      "cpe": null
+    },
+    {
+      "description": "Provisionierter Plattenspeicher in VMware",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "unbekannt",
+      "operatingSystemVersion": null,
+      "class": "Storage Device",
+      "id": "169441",
+      "product": "vSpace",
+      "cpe": null
+    },
+    {
+      "description": "SUSE Linux Enterprise Server 15 SP4",
+      "isSoftware": true,
+      "operatingSystem": null,
+      "manufacturer": "SUSE",
+      "operatingSystemVersion": null,
+      "class": "Operating System Software",
+      "id": "169441",
+      "product": "SUSE Linux Enterprise Server 15 SP4",
+      "cpe": "cpe:2.3:o:suse:linux_enterprise_server:15:sp4:*:*:*:*:*:*"
+    }
+  ],
+  "id": "169441",
+  "type": "Virtueller Server (VMware)"
+}

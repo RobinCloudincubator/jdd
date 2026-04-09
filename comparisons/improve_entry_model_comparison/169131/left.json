@@ -1,0 +1,53 @@
+{
+  "components": [
+    {
+      "class": "Notebook System",
+      "cpe": null,
+      "description": "Lenovo ThinkPad X1 Yoga Gen7 21CD",
+      "isSoftware": false,
+      "manufacturer": "Lenovo",
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": [
+        10,
+        11
+      ],
+      "id": "169131",
+      "product": "ThinkPad X1 Yoga Gen 7"
+    },
+    {
+      "class": "Monitor",
+      "cpe": null,
+      "description": "24 Zoll Dell UltraSharp U2413 Monitor",
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169131",
+      "product": "UltraSharp U2413"
+    },
+    {
+      "class": "Monitor",
+      "cpe": null,
+      "description": "24 Zoll Dell UltraSharp U2415 Monitor",
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169131",
+      "product": "UltraSharp U2415"
+    },
+    {
+      "class": "Software Lizenz",
+      "cpe": null,
+      "description": "Citrix GoToMeeting Videokonferenz-Software",
+      "isSoftware": true,
+      "manufacturer": "Citrix",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169131",
+      "product": "Citrix GoToMeeting"
+    }
+  ],
+  "id": "169131",
+  "type": "Notebook"
+}

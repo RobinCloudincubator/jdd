@@ -1,0 +1,21 @@
+{
+  "components": [
+    {
+      "class": "Smartwatch",
+      "cpe": null,
+      "description": "Apple Watch Serie 6",
+      "isSoftware": false,
+      "manufacturer": "Apple",
+      "operatingSystem": "watchOS",
+      "operatingSystemVersion": [
+        7,
+        8,
+        9
+      ],
+      "id": "172845",
+      "product": "Watch Serie 6"
+    }
+  ],
+  "id": "172845",
+  "type": "Smartwatch"
+}

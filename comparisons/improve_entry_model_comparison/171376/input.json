@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": "Apple iPhone 11",
+      "isSoftware": null,
+      "operatingSystem": null,
+      "manufacturer": "Apple",
+      "operatingSystemVersion": null,
+      "class": "Smartphone",
+      "id": "171376",
+      "product": "iPhone 11"
+    }
+  ],
+  "id": "171376",
+  "type": "Smartphone"
+}

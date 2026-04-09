@@ -1,0 +1,24 @@
+{
+  "components": [
+    {
+      "class": "Tablet Computer",
+      "cpe": null,
+      "description": "Apple iPad Pro 10,5 Zoll (2. Gen) 256 GB Tablet Computer",
+      "isSoftware": "false",
+      "manufacturer": "Apple",
+      "operatingSystem": "iPadOS",
+      "operatingSystemVersion": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "id": "172723",
+      "product": "iPad Pro 10.5-inch (2nd Generation) 256GB"
+    }
+  ],
+  "id": "172723",
+  "type": "Tablet"
+}

@@ -1,0 +1,72 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": null,
+      "description": "Cisco UCS B200 M4 Server",
+      "isSoftware": false,
+      "manufacturer": "Cisco",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "B200 M4"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "CPU",
+      "cpe": "cpe:2.3:h:intel:xeon_e5-2660_v3:-:*:*:*:*:*:*:*",
+      "description": "Intel Xeon E5-2660 v3 CPU",
+      "isSoftware": false,
+      "manufacturer": "Intel",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "Intel Xeon E5-2660 v3"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": null,
+      "description": "Citrix XenServer Hypervisor 8.2 LTSR (SMS)",
+      "isSoftware": true,
+      "manufacturer": "Citrix",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "XenServer Hypervisor 8.2 LTSR (SMS)"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "interne HDD (Sammler)"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.",
+      "isSoftware": null,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170989",
+      "product": "externe HDD (Sammler)"
+    }
+  ],
+  "id": "170989",
+  "type": "Server"
+}

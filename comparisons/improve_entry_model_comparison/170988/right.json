@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "class": "Server",
+      "cpe": null,
+      "description": "Dell PowerEdge T420 Server",
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170988",
+      "product": "T420"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für physische Server; Einheit in GB",
+      "isSoftware": false,
+      "manufacturer": "N/A",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170988",
+      "product": "RAM (physisch)"
+    },
+    {
+      "class": "CPU",
+      "cpe": "cpe:2.3:h:intel:xeon_e5-2440:-:*:*:*:*:*:*:*",
+      "description": "Intel Xeon E5-2440 CPU",
+      "isSoftware": false,
+      "manufacturer": "Intel",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "170988",
+      "product": "Intel Xeon E5-2440"
+    }
+  ],
+  "id": "170988",
+  "type": "Server"
+}

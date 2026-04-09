@@ -1,0 +1,32 @@
+id,operatingSystem,operatingSystemVersion,product,description,isSoftware,manufacturer,class,id,type
+168109,[],[],"[Optiplex 7060]",[],[false],[Dell],[Desktop],168109,"Fat Client"
+169131,"[,,,]","[,,,]","[ThinkPad X1 Gen.7,UltraSharp U2413,UltraSharp U2415,Citrix GoToMeeting]","[Lenovo ThinkPad X1 Yoga Gen7 21CD,24 Zoll,24 Zoll,]","[false,false,false,true]","[Lenovo,Dell,Dell,Citrix]","[Notebook System,Monitor,Monitor,Software Lizenz]",169131,Notebook
+169134,[],[],[E5570],[],[false],[Dell],"[Notebook System]",169134,Notebook
+169155,"[,,,,,,,,,]","[,,,,,,,,,]","[ThinkPad T14 Gen4,UltraSharp U2415,UltraSharp U2415,UltraSharp U2415,_Basis_Lager_Microsoft InternetExplorer 11 32bit,7-Zip 9.2,IrfanView 4.3,MindManager Pool 2021,Mind Manager Pro ,VLC Player 2.1.3]","[Lenovo ThinkPad T14 Gen4 21HD,24 Zoll,24 Zoll,24 Zoll,,,,,,]","[false,false,false,false,true,true,true,true,true,true]","[Lenovo,Dell,Dell,Dell,Microsoft,7-Zip,Irfan View,Corel,Corel,VLC]","[Notebook System,Monitor,Monitor,Monitor,Software Lizenz,Software Lizenz,Software Lizenz,Software Lizenz,Software Lizenz,Software Lizenz]",169155,Notebook
+169165,[],[],"[ThinkPad T16 Gen.2]","[Lenovo ThinkPad T16 Gen2 21HH
+]",[false],[Lenovo],"[Notebook System]",169165,Notebook
+169356,[],[],"[Speedbox mini II (Telekom)]","[Huawei Speedbox mini II (Telekom)]",[false],[HUAWEI],"[Mobil Wlan Router]",169356,"Mobil Wlan Router"
+169390,[],[],"[Mobile WiFi Pro 2]","[Huawei Mobile WiFi Pro 2]",[false],[HUAWEI],"[Mobil Wlan Router]",169390,"Mobil Wlan Router"
+169441,"[,,,,,,]","[,,,,,,]","[Virtueller Server (VMware),Apache 2.4,PHP (DSV) 7.3,vCPU,vRAM,vSpace,SUSE Linux Enterprise Server 15 SP4]","[VM auf Basis von VMware,,,-,RAM für VMs; Einheit in GB
+,Provisionierter Plattenspeicher in VMware,SUSE Linux Enterprise Server 15 SP4]","[false,true,true,false,false,,true]","[VMware,Apache,PHP Foundation,VMware,VMware,unbekannt,SUSE]","[Virtueller Server,DSV-Middleware wie z. B. Application Server,DSV-Middleware wie z. B. Application Server,CPU,Memory Module,Storage Device,Operating System Software]",169441,"Virtueller Server (VMware)"
+169443,"[,,,,,,,]","[,,,,,,,]","[Virtueller Server (VMware),Apache 2.4,PHP (DSV) 7.3,MySQL 5.6,vCPU,vRAM,vSpace,CentOS Linux 7]","[VM auf Basis von VMware,,,,-,RAM für VMs; Einheit in GB
+,Provisionierter Plattenspeicher in VMware,Interne Anmerkung 08.11.2016: Neu aufgenommen.
+ Interne Anmerkung 13.02.2018: EoS von 30.06.2024 auf 30.06.2023 und EoL von unbekannt auf 30.06.2024 angepasst.]","[false,true,true,true,false,false,,true]","[VMware,Apache,PHP Foundation,Oracle,VMware,VMware,unbekannt,RedHat]","[Virtueller Server,DSV-Middleware wie z. B. Application Server,DSV-Middleware wie z. B. Application Server,Database,CPU,Memory Module,Storage Device,Operating System Software]",169443,"Virtueller Server (VMware)"
+169982,"[,,,,]","[,,,,]","[vCPU,vRAM,vSpace,Virtueller Server (VMware),Microsoft Windows Server 2016 Standard]","[-,RAM für VMs; Einheit in GB
+,Provisionierter Plattenspeicher in VMware,VM auf Basis von VMware,]","[false,false,,false,true]","[VMware,VMware,unbekannt,VMware,Microsoft]","[CPU,Memory Module,Storage Device,Virtueller Server,Operating System Software]",169982,"Virtueller Server (VMware)"
+170938,"[,,,]","[,,,]","[B200 M4,VMware ESXi 7.0,RAM (physisch),Intel Xeon E5-2690 v4]","[B200 M4,VMware ESXi 7.0,RAM für physische Sever; Einheit in GB
+,-]","[false,true,false,false]","[Cisco,VMware,N/A,]","[Server,Operating System Software,Memory Module,CPU]",170938,Server
+170939,"[,,,,,]","[,,,,,]","[B200 M4,VMware ESXi 7.0,RAM (physisch),Intel Xeon E5-2697A v4,externe HDD (Sammler),interne HDD (Sammler)]","[B200 M4,VMware ESXi 7.0,RAM für physische Sever; Einheit in GB
+,-,Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.,Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.]","[false,true,false,false,,]","[Cisco,VMware,N/A,,N/A,N/A]","[Server,Operating System Software,Memory Module,CPU,Storage Device,Storage Device]",170939,Server
+170988,"[,,]","[,,]","[T420,RAM (physisch),Intel Xeon E5-2440]","[T420,RAM für physische Sever; Einheit in GB
+,-]","[false,false,false]","[Dell,N/A,]","[Server,Memory Module,CPU]",170988,Server
+170989,"[,,,,,]","[,,,,,]","[B200 M4,RAM (physisch),Intel Xeon E5-2660 v3,XenServer Hypervisor 8.2 LTSR (SMS),interne HDD (Sammler),externe HDD (Sammler)]","[B200 M4,RAM für physische Sever; Einheit in GB
+,-,,Sammler für verrechenbare Summe interner HDDs. Diese können als Unterkomponenten geführt werden.,Summe verrechenbarer externe HDDs. Einzelne LUNs können als Unterkomponenten geführt werden.]","[false,false,false,true,,]","[Cisco,N/A,,Citrix,N/A,N/A]","[Server,Memory Module,CPU,Operating System Software,Storage Device,Storage Device]",170989,Server
+171125,"[,,,,]","[,,,,]","[VxRail P670F,Intel Xeon Gold 6348 2.6G, 28C/ 56T,RAM (physisch),Primäres-Netzteil 1100 Watt,Sekundäres-Netzteil 1100 Watt]","[,,RAM für physische Sever; Einheit in GB
+,Primäres-Netzteil 1100 Watt,Sekundäres-Netzteil 1100 Watt]","[false,false,false,false,false]","[Dell,,N/A,N/A,N/A]","[Server,CPU,Memory Module,Power-Switch / Netzteil,Power-Switch / Netzteil]",171125,Server
+171376,[],[],"[iPhone 11]","[Apple iPhone 11]",[],[Apple],[Smartphone],171376,Smartphone
+171377,[],[],"[Pixel 4]","[Google Pixel 4]",[],[Google],[Smartphone],171377,Smartphone
+171423,[],[],"[Galaxy S9+]","[Samsung Galaxy S9+]",[],[Samsung],[Smartphone],171423,Smartphone
+171424,[],[],"[Galaxy S6 edge]","[Samsung Galaxy S6 edge]",[],[Samsung],[Smartphone],171424,Smartphone
+172723,[],[],"[iPad Pro 10,5 Zoll (2. Gen) 256 GB]","[Apple iPad Pro 10,5 Zoll (2. Gen) 256 GB]",[],[Apple],"[Tablet Computer]",172723,Tablet
+172845,[],[],"[Watch Serie 6]","[Apple Watch Serie 6]",[false],[Apple],[Smartwatch],172845,Smartwatch

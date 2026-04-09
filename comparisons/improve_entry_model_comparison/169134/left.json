@@ -1,0 +1,24 @@
+{
+  "components": [
+    {
+      "class": "Notebook System",
+      "cpe": "cpe:2.3:h:dell:latitude_e5570:-:*:*:*:*:*:*:*",
+      "description": "Dell Latitude E5570 Notebook System",
+      "isSoftware": false,
+      "manufacturer": "Dell",
+      "operatingSystem": [
+        "Windows",
+        "Linux"
+      ],
+      "operatingSystemVersion": [
+        "Windows 7",
+        "Windows 10",
+        "Ubuntu"
+      ],
+      "id": "169134",
+      "product": "Latitude E5570"
+    }
+  ],
+  "id": "169134",
+  "type": "Notebook"
+}

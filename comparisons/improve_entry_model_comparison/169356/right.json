@@ -1,0 +1,17 @@
+{
+  "components": [
+    {
+      "class": "Mobil Wlan Router",
+      "cpe": null,
+      "description": "Huawei Speedbox mini II (Telekom)",
+      "isSoftware": false,
+      "manufacturer": "HUAWEI",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169356",
+      "product": "Speedbox mini II (Telekom)"
+    }
+  ],
+  "id": "169356",
+  "type": "Mobil Wlan Router"
+}

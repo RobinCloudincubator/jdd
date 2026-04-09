@@ -1,0 +1,20 @@
+{
+  "components": [
+    {
+      "class": "Notebook System",
+      "cpe": null,
+      "description": "Lenovo ThinkPad T16 Gen 2 (Model 21HH) Notebook",
+      "isSoftware": false,
+      "manufacturer": "Lenovo",
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": [
+        "Windows 11 Pro",
+        "Windows 10 Pro"
+      ],
+      "id": "169165",
+      "product": "ThinkPad T16 Gen 2"
+    }
+  ],
+  "id": "169165",
+  "type": "Notebook"
+}

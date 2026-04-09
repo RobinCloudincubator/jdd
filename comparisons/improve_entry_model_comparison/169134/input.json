@@ -1,0 +1,16 @@
+{
+  "components": [
+    {
+      "description": null,
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Notebook System",
+      "id": "169134",
+      "product": "E5570"
+    }
+  ],
+  "id": "169134",
+  "type": "Notebook"
+}

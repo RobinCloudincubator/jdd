@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "description": "T420",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "Dell",
+      "operatingSystemVersion": null,
+      "class": "Server",
+      "id": "170988",
+      "product": "T420"
+    },
+    {
+      "description": "RAM für physische Sever; Einheit in GB",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": "N/A",
+      "operatingSystemVersion": null,
+      "class": "Memory Module",
+      "id": "170988",
+      "product": "RAM (physisch)"
+    },
+    {
+      "description": "-",
+      "isSoftware": false,
+      "operatingSystem": null,
+      "manufacturer": null,
+      "operatingSystemVersion": null,
+      "class": "CPU",
+      "id": "170988",
+      "product": "Intel Xeon E5-2440"
+    }
+  ],
+  "id": "170988",
+  "type": "Server"
+}

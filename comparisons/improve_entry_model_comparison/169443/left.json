@@ -1,0 +1,94 @@
+{
+  "components": [
+    {
+      "class": "Virtueller Server",
+      "cpe": "cpe:2.3:a:vmware:vsphere:-:*:*:*:*:*:*:*",
+      "description": "VM auf Basis von VMware",
+      "isSoftware": "false",
+      "manufacturer": "VMware",
+      "operatingSystem": "CentOS Linux",
+      "operatingSystemVersion": "7",
+      "id": "169443",
+      "product": "Virtueller Server (VMware)"
+    },
+    {
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "cpe": "cpe:2.3:a:apache:http_server:2.4.0:*:*:*:*:*:*:*",
+      "description": "Apache HTTP Server 2.4",
+      "isSoftware": "true",
+      "manufacturer": "Apache",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "Apache 2.4"
+    },
+    {
+      "class": "DSV-Middleware wie z. B. Application Server",
+      "cpe": "cpe:2.3:a:php:php:7.3.0:*:*:*:*:*:*:*",
+      "description": "PHP 7.3 Scripting Language",
+      "isSoftware": "true",
+      "manufacturer": "PHP Foundation",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "PHP (DSV) 7.3"
+    },
+    {
+      "class": "Database",
+      "cpe": "cpe:2.3:a:oracle:mysql:5.6.0:*:*:*:*:*:*:*",
+      "description": "Oracle MySQL Database Server 5.6",
+      "isSoftware": "true",
+      "manufacturer": "Oracle",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "MySQL 5.6"
+    },
+    {
+      "class": "CPU",
+      "cpe": null,
+      "description": "Virtual CPU für VMware VM",
+      "isSoftware": "false",
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "vCPU"
+    },
+    {
+      "class": "Memory Module",
+      "cpe": null,
+      "description": "RAM für VMs; Einheit in GB",
+      "isSoftware": "false",
+      "manufacturer": "VMware",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "vRAM"
+    },
+    {
+      "class": "Storage Device",
+      "cpe": null,
+      "description": "Provisionierter Plattenspeicher in VMware",
+      "isSoftware": "false",
+      "manufacturer": "unbekannt",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "vSpace"
+    },
+    {
+      "class": "Operating System Software",
+      "cpe": "cpe:2.3:o:centos:centos:7.0:*:*:*:*:*:*:*",
+      "description": "CentOS Linux 7 Betriebssystem",
+      "isSoftware": "true",
+      "manufacturer": "CentOS",
+      "operatingSystem": null,
+      "operatingSystemVersion": null,
+      "id": "169443",
+      "product": "CentOS Linux 7"
+    }
+  ],
+  "id": "169443",
+  "type": "Virtueller Server (VMware)"
+}

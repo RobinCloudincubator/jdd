@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "class": "Smartphone",
+      "cpe": "cpe:2.3:h:apple:iphone_11:-:*:*:*:*:*:*:*",
+      "description": "Apple iPhone 11 Smartphone",
+      "isSoftware": "false",
+      "manufacturer": "Apple",
+      "operatingSystem": "iOS",
+      "operatingSystemVersion": [
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "id": "171376",
+      "product": "iPhone 11"
+    }
+  ],
+  "id": "171376",
+  "type": "Smartphone"
+}
